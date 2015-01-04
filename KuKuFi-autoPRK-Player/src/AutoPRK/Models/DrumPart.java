@@ -12,11 +12,14 @@ package AutoPRK.Models;
 public class DrumPart {
 
     private String partName = null;
+    private String noteName = null;
+    private int key;
 
-    public DrumPart(String partName) {
+    public DrumPart(int key, String partName) {
         this.partName = partName;
+        this.key = key;
+        this.noteName = toNoteName();
     }
-
 
     /**
      * @return the partName
@@ -32,9 +35,23 @@ public class DrumPart {
         this.partName = partName;
     }
     
+    /**
+     * @return the key
+     */
+    public int getKey() {
+        return key;
+    }
+    
     @Override
-    public String toString(){
-        return partName;
+    public String toString() {
+        return key + " " + noteName +  " " + partName;
+    }
+
+    private String toNoteName() {
+        int octave = (key / 12) - 1;
+        int note = key % 12;
+        String noteName = Model.NOTE_NAMES[note];
+        return noteName + octave;
     }
 
 
