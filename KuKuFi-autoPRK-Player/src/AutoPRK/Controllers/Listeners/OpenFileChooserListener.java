@@ -7,13 +7,10 @@ package AutoPRK.Controllers.Listeners;
 
 import AutoPRK.Controllers.ModelCreator;
 import AutoPRK.Controllers.WindowController;
-import AutoPRK.Exceptions.InitlializeWindowControllerException;
 import AutoPRK.Models.Model;
 import AutoPRK.views.mainWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 /**

@@ -23,6 +23,8 @@ public class StopButtonListener implements ActionListener{
         WindowController.getInstance().setEnablingOfStep1(Boolean.TRUE);
         WindowController.getInstance().setEnablingOfStep2(Boolean.TRUE);
         
+        char[] stop = {104};
+        Model.serialPortTransmiter.sendData(new String(stop));
     }
     
 }

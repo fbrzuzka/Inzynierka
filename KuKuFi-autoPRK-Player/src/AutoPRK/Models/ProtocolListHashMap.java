@@ -27,14 +27,14 @@ public class ProtocolListHashMap extends LinkedHashMap<DrumPart, SingleDrumEleme
         }
         return rc;
     }
-    public String toArduino(int limit) {
-        String rc = "\n";
-        int iter=0;
-        for (DrumPart dr : this.keySet()) {
-            rc +=  "unsigned char foo" + iter  + "[ODEBRANE] = " + this.get(dr).drToArduino(limit)+ "; \n";
-            iter++;
-        }
-        return rc;
-    }
+//    public String toArduino(int limit) {
+//        String rc = "\n";
+//        int iter=0;
+//        for (DrumPart dr : this.keySet()) {
+//            rc +=  "unsigned char foo" + iter  + "[ODEBRANE] = " + this.get(dr).drToArduino(limit)+ "; \n";
+//            iter++;
+//        }
+//        return rc;
+//    }
 
 }

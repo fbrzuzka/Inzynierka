@@ -3,19 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.Models;
-
-import java.util.ArrayList;
+package AutoPRK.MidiPlayer;
 
 /**
  *
  * @author fbrzuzka
  */
-public class DrumPartList extends ArrayList<DrumPart>{
+public interface MusicSliderListener {
 
-    public DrumPartList() {
-        super();
-    }
-    
-    
+    public void handleEvent(int position);
+
 }

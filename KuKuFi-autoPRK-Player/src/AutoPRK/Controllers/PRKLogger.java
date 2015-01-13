@@ -26,9 +26,12 @@ public class PRKLogger {
 
         private static final PRKLogger INSTANCE = new PRKLogger();
         
+        
     }
     
     public void logToInfoArea(String str){
         window.getInfoArea().append(str + "\n");
     }
+
+    
 }

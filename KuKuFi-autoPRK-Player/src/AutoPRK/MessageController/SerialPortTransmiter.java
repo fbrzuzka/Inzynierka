@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package AutoPRK.MessageController;
 
 
 import gnu.io.CommPortIdentifier;
@@ -10,10 +16,16 @@ import java.io.OutputStream;
 import java.util.Enumeration;
 
 /**
- * @author ericjbruno
+ *
+ * @author fbrzuzka
  */
-public class ArduinoTest1 implements SerialPortEventListener {
+public class SerialPortTransmiter implements SerialPortEventListener {
     SerialPort serialPort = null;
+    
+    public SerialPortTransmiter(){
+        initialize();
+        
+    }
 
     private static final String PORT_NAMES[] = { 
 //        "/dev/tty.usbmodem", // Mac OS X
@@ -90,24 +102,16 @@ public class ArduinoTest1 implements SerialPortEventListener {
         return false;
     }
     
-    private void sendData(String data) {
+    public void sendData(String data) {
         try {
             
             System.out.println("Sending data: '" + data +"'");
             // open the streams and send the "y" character
             output = serialPort.getOutputStream();
-            
-           output.write( data.getBytes() );
-//            byte[] b= new byte[1];
-//            b[0] = 102;
-         //   System.out.println("");
-         //   System.out.print(b[0]);
-        //    System.out.println("");
-           // output.write(b);
+            output.write( data.getBytes() );
         } 
         catch (Exception e) {
-            System.err.println(e.toString());
-            System.exit(0);
+            System.err.println("Hey men, you dont connect Arduino!");
         }
     }
 
@@ -119,6 +123,7 @@ public class ArduinoTest1 implements SerialPortEventListener {
             serialPort.removeEventListener();
             serialPort.close();
         }
+        System.out.println("trying to close serial port transmiter");
     }
 
     //
@@ -150,36 +155,6 @@ public class ArduinoTest1 implements SerialPortEventListener {
             System.err.println(e.toString());
         }
     }
-
-    public ArduinoTest1() {
-        appName = getClass().getName();
-    }
-    
-    public static void main(String[] args) throws Exception {
-        ArduinoTest1 test = new ArduinoTest1();
-        if ( test.initialize() ) {
-            char[] play = {102};
-            String play2 = new String(play);
-            test.sendData(play2);
             
-            try { Thread.sleep(2000); } catch (InterruptedException ie) {}
-//            test.sendData("n");
-//            try { Thread.sleep(2000); } catch (InterruptedException ie) {}
-//            test.sendData("n");
-//            try { Thread.sleep(2000); } catch (InterruptedException ie) {}
-//            test.sendData("n");
-//            try { Thread.sleep(2000); } catch (InterruptedException ie) {}
-//            test.sendData("n");
-//            try { Thread.sleep(2000); } catch (InterruptedException ie) {}
-//            test.sendData("n");
-//            try { Thread.sleep(2000); } catch (InterruptedException ie) {}
-            test.close();
-        }
-
-        // Wait 5 seconds then shutdown
-        try { Thread.sleep(2000); } catch (InterruptedException ie) {}
-    }
 }
-
-
 

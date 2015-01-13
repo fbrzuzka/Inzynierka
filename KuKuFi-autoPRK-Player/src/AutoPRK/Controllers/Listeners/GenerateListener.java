@@ -41,6 +41,11 @@ public class GenerateListener implements ActionListener {
 
         WindowController.getInstance().setEnablingOfStep3(true);
         WindowController.getInstance().echoFewImportantInfoOnInfoArea();
+        WindowController.getInstance().setMaxOnMusicSlider((int) (Model.sequenceOriginal.getMicrosecondLength() / 1000000));
+
+        
+        WindowController.getInstance().addDrumTrackCheckBoxes(Model.drumTrackElements);
+        WindowController.getInstance().addDrumPartCheckBoxes(Model.drumPartElements);
 
     }
 

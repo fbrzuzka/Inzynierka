@@ -3,6 +3,7 @@ package AutoPRK.Controllers;
 import AutoPRK.Models.ByteNote;
 import AutoPRK.Models.DrumPart;
 import AutoPRK.Models.DrumPartList;
+import AutoPRK.Models.DrumPartListSingleton;
 import com.sun.org.apache.xalan.internal.lib.ExsltMath;
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +21,6 @@ import javax.sound.midi.Track;
 
 import AutoPRK.Models.ProtocolListHashMap;
 import AutoPRK.Models.Model;
-import static AutoPRK.Models.Model.NOTE_NAMES;
 import AutoPRK.Models.SingleDrumElementTimelineArray;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -33,14 +33,63 @@ public class ModelCreator {
     static Model model = Model.instanceOf();
 
     public ModelCreator() {
-        model.protocolList = new ProtocolListHashMap();
+        Model.protocolList = new ProtocolListHashMap();
        
        // setAllTracks(model.sequenceOriginal);
-        setSDontRememberWhat(model.trackSelectedToGenerate);
+        setSDontRememberWhat(Model.trackSelectedToGenerate);
         // echoInfoAboutModel(model.sequenceOriginal);
-        parseTrackToArrayList(model.trackSelectedToGenerate);
+        //parseTrackToArrayList(model.trackSelectedToGenerate);
+        Model.protocolList = newParseToHashMap(model.trackSelectedToGenerate);
 
     }
+    
+    public DrumPartList addElementsToDrumTrack(){
+        DrumPartList dpl = new DrumPartList();
+        
+        return dpl;
+    }
+    private ProtocolListHashMap newParseToHashMap(Track track){
+        ProtocolListHashMap rc = new ProtocolListHashMap();
+        
+        Model.drumTrackElements  = findElementOfDrumKit(track);
+
+        for (DrumPart drumKitElement : Model.drumTrackElements) {
+            rc.put(drumKitElement, new SingleDrumElementTimelineArray(drumKitElement));
+        }
+
+        for (int i = 0; i < track.size(); i++) {
+            MidiEvent event = track.get(i);
+
+            double tickInMs = (event.getTick() * model.milis)/1000;
+            double tempoTickInMs = tickInMs * model.tempo;
+            MidiMessage message = event.getMessage();
+            if (message instanceof ShortMessage) {
+                ShortMessage sm = (ShortMessage) message;
+                if (sm.getCommand() == NOTE_ON) {
+
+                    int key = sm.getData1();
+                    int velocity = sm.getData2();
+                    
+                    System.out.print("@" + event.getTick() + " " + tempoTickInMs + " ");
+                    System.out.print("Channel: " + sm.getChannel() + " ");
+                    System.out.println(" velocity: " + velocity + DrumPartListSingleton.getInstance().get(key).toString());
+
+                    DrumPart drumPart = DrumPartListSingleton.getInstance().get(key);
+                    rc.get(drumPart).add(tempoTickInMs);
+                    
+                }
+            }
+        }
+        System.out.println();
+        System.out.println("rc: " + rc.toString());
+        return rc;
+    
+        
+    }
+    
+    
+    
+    
     
    public static Sequence getSequenceFromMidiFile(File file) {
 
@@ -115,13 +164,13 @@ public class ModelCreator {
 
     }
 
-    private void initTimelineWithBlankElements(SingleDrumElementTimelineArray timeLine, long microSecLength) {
-        int stop = (int) (Math.ceil(microSecLength * model.tempo / 1000000));
-        for (int i = 0; i < stop; i++) {
-            timeLine.add(new ByteNote(ByteNote.EMPTY_BYTE));
-        }
-    }
-
+//    private void initTimelineWithBlankElements(SingleDrumElementTimelineArray timeLine, long microSecLength) {
+//        int stop = (int) (Math.ceil(microSecLength * model.tempo / 1000000));
+//        for (int i = 0; i < stop; i++) {
+//            timeLine.add(new ByteNote(ByteNote.EMPTY_BYTE));
+//        }
+//    }
+    /*
     private ProtocolListHashMap parseTrackToArrayList(Track track) {
         ProtocolListHashMap rc = new ProtocolListHashMap();
         List<DrumPart> listOfDrumKitElements = findElementOfDrumKit(track);
@@ -145,14 +194,14 @@ public class ModelCreator {
                     int key = sm.getData1();
                     int velocity = sm.getData2();
                     
-//                    System.out.print("@" + event.getTick() + " " + tempoTickInMs + " ");
-//                    System.out.print("Channel: " + sm.getChannel() + " ");
-//                    System.out.println(" velocity: " + velocity + DrumPartList.getInstance().get(key).toString());
+                    System.out.print("@" + event.getTick() + " " + tempoTickInMs + " ");
+                    System.out.print("Channel: " + sm.getChannel() + " ");
+                    System.out.println(" velocity: " + velocity + DrumPartListSingleton.getInstance().get(key).toString());
 
                     int indexOfNotetoSet = (int) (tempoTickInMs / 1000);
 
                     DrumPart drumPart;
-                    drumPart = DrumPartList.getInstance().get(key);
+                    drumPart = DrumPartListSingleton.getInstance().get(key);
 
                     ByteNote noteToSet = rc.get(drumPart).get(indexOfNotetoSet);
                     noteToSet.setByteNote(event);
@@ -165,11 +214,11 @@ public class ModelCreator {
         System.out.println("rc: " + rc.toArduino(Model.limitOfTrackLength));
         return rc;
     }
-
-    private List<DrumPart> findElementOfDrumKit(Track track) {
+    */
+    private DrumPartList findElementOfDrumKit(Track track) {
 
         List<Integer> l = new ArrayList();
-        List<DrumPart> listOfDrumKitElements = new ArrayList();
+        DrumPartList listOfDrumKitElements = new DrumPartList();
 
         for (int i = 0; i < track.size(); i++) {
             MidiEvent event = track.get(i);
@@ -181,14 +230,14 @@ public class ModelCreator {
                     int key = sm.getData1();
                     if (!l.contains(key)) {
                         l.add(key);
-                        listOfDrumKitElements.add(DrumPartList.getInstance().get(key));
+                        listOfDrumKitElements.add(DrumPartListSingleton.getInstance().get(key));
                     }
                 }
             }
         }
         //System.out.println("lista: " + l);
         for (Integer  index : l) {
-            System.out.println( DrumPartList.getInstance().get(index));
+            System.out.println(DrumPartListSingleton.getInstance().get(index));
         }
         return listOfDrumKitElements;
     }

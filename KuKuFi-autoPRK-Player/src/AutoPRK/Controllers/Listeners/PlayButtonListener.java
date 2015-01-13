@@ -5,6 +5,7 @@
  */
 package AutoPRK.Controllers.Listeners;
 
+import AutoPRK.Controllers.PRKLogger;
 import AutoPRK.Controllers.WindowController;
 import AutoPRK.Models.Model;
 import java.awt.event.ActionEvent;
@@ -22,6 +23,9 @@ public class PlayButtonListener implements ActionListener{
         
         WindowController.getInstance().setEnablingOfStep1(false);
         WindowController.getInstance().setEnablingOfStep2(false);
+        
+        char[] play = {102};
+        Model.serialPortTransmiter.sendData(new String(play));
     }
     
 }

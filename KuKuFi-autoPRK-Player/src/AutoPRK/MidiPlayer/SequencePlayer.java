@@ -1,5 +1,7 @@
 package AutoPRK.MidiPlayer;
 
+import AutoPRK.Controllers.PRKLogger;
+import AutoPRK.Models.Model;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,9 +21,11 @@ public class SequencePlayer {
     private Sequence sequenceToPlay = null;
     private MidiDevice receivingDevice;
     private Sequencer sequencer1;
+    public MusicSliderListener listner;
+    private Thread thread;
 
     public SequencePlayer(Sequence seq) {
-       
+
         this.sequenceToPlay = seq;
 
         try {
@@ -40,18 +44,28 @@ public class SequencePlayer {
         }
 
     }
+
+ 
     
-    public void muteTrack(int numberOfTrack, boolean mute){
+    public void callSlider() {
+
+        int position = (int) (sequencer1.getTickPosition() * Model.instanceOf().milis / 1000);
+       // System.out.println(position);
+        listner.handleEvent(position);
+    }
+
+    public void muteTrack(int numberOfTrack, boolean mute) {
         sequencer1.setTrackMute(numberOfTrack, mute);
     }
 
     public void play() {
         sequencer1.start();
     }
-    
+
     public void pause() {
         sequencer1.stop();
     }
+
     public void stop() {
         sequencer1.stop();
         sequencer1.setTickPosition(0);
@@ -72,6 +86,10 @@ public class SequencePlayer {
             }
         }
         return null;
+    }
+
+    public void setTickPosition(long tickPosition) {
+        sequencer1.setTickPosition(tickPosition);
     }
 
 }

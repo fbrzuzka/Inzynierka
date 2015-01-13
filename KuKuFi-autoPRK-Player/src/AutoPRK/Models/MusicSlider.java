@@ -5,17 +5,18 @@
  */
 package AutoPRK.Models;
 
-import java.util.ArrayList;
+import AutoPRK.MidiPlayer.MusicSliderListener;
+import javax.swing.JSlider;
 
 /**
  *
  * @author fbrzuzka
  */
-public class DrumPartList extends ArrayList<DrumPart>{
+public class MusicSlider extends JSlider implements MusicSliderListener{
 
-    public DrumPartList() {
-        super();
+    @Override
+    public void handleEvent(int position) {
+        this.setValue(position);
     }
-    
     
 }

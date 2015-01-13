@@ -11,7 +11,8 @@ import java.util.ArrayList;
  *
  * @author fbrzuzka
  */
-public class SingleDrumElementTimelineArray extends ArrayList<ByteNote>{
+
+public class SingleDrumElementTimelineArray extends ArrayList<Double>{
     private DrumPart drumPart;
     public SingleDrumElementTimelineArray(DrumPart drumPart){
         super();
@@ -24,16 +25,43 @@ public class SingleDrumElementTimelineArray extends ArrayList<ByteNote>{
     public DrumPart getDrumPart() {
         return drumPart;
     }
-      public String drToArduino(int limit){
-        String rc = "{ " + this.get(0) + ",\t";
-        for(int i=1 ; i < this.size() - 1 ; i++) {
-            if(i == limit){
-                break;
-            }
-              rc += this.get(i) + ",\t";
-          }
-          rc += "}";
-        return rc;
-    }
+//      public String drToArduino(int limit){
+//        String rc = "{ " + this.get(0) + ",\t";
+//        for(int i=1 ; i < this.size() - 1 ; i++) {
+//            if(i == limit){
+//                break;
+//            }
+//              rc += this.get(i) + ",\t";
+//          }
+//          rc += "}";
+//        return rc;
+//    }
     
 }
+
+//public class SingleDrumElementTimelineArray extends ArrayList<ByteNote>{
+//    private DrumPart drumPart;
+//    public SingleDrumElementTimelineArray(DrumPart drumPart){
+//        super();
+//        this.drumPart = drumPart;
+//    }
+//
+//    /**
+//     * @return the drumPart
+//     */
+//    public DrumPart getDrumPart() {
+//        return drumPart;
+//    }
+//      public String drToArduino(int limit){
+//        String rc = "{ " + this.get(0) + ",\t";
+//        for(int i=1 ; i < this.size() - 1 ; i++) {
+//            if(i == limit){
+//                break;
+//            }
+//              rc += this.get(i) + ",\t";
+//          }
+//          rc += "}";
+//        return rc;
+//    }
+//    
+//}
