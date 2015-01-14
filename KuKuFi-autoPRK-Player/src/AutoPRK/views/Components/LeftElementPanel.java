@@ -9,9 +9,9 @@ package AutoPRK.views.Components;
  *
  * @author fbrzuzka
  */
-public class RightDrumPanel extends DrumTrackPanelBase{
+public class LeftElementPanel extends DrumTrackPanelBase{
 
-    public RightDrumPanel() {
+    public LeftElementPanel() {
         super();
     }
     

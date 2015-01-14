@@ -1,7 +1,11 @@
 package AutoPRK.Models;
 
+import AutoPRK.Models.Containers.TrackMap;
+import AutoPRK.Models.Containers.ProtocolListHashMap;
+import AutoPRK.Models.Containers.DrumPartList;
 import AutoPRK.MessageController.SerialPortTransmiter;
 import AutoPRK.MidiPlayer.*;
+import AutoPRK.Models.Containers.ConnectConfiguration;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,7 @@ public class Model {
     public static DrumPartList drumTrackElements;
     public static List<String> drumPartElements;
     public static ProtocolListHashMap protocolList = null;
+    public static ConnectConfiguration connectConfig;
 
     public static TrackMap trackListToPlayFromSpeakers;
     public static SequencePlayer sequencePlayer;

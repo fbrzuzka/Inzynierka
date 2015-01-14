@@ -14,6 +14,9 @@ import AutoPRK.Controllers.WindowController;
 import AutoPRK.Models.Model;
 import AutoPRK.Models.MusicSlider;
 import AutoPRK.views.Components.ConnectPanel;
+import AutoPRK.views.Components.DrumTrackPanelBase;
+import AutoPRK.views.Components.LeftElementPanel;
+import AutoPRK.views.Components.RightDrumPanel;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -67,10 +70,12 @@ public class mainWindow extends javax.swing.JFrame {
         fooLabel = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         connectPanel = new ConnectPanel();
-        drumTrackPanel = new javax.swing.JPanel();
-        ((ConnectPanel)connectPanel).setDrumTrackPanel(drumTrackPanel);
-        drumPartPanel = new javax.swing.JPanel();
-        ((ConnectPanel)connectPanel).setDrumPartPanel(drumPartPanel);
+        drumTrackPanel = new AutoPRK.views.Components.LeftElementPanel();
+        ;
+        ((ConnectPanel)connectPanel).setDrumTrackPanel((DrumTrackPanelBase)drumTrackPanel);
+        drumElementtPanel = new RightDrumPanel();
+        ;
+        ((ConnectPanel)connectPanel).setDrumElementPanel((DrumTrackPanelBase)drumElementtPanel);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -184,6 +189,7 @@ public class mainWindow extends javax.swing.JFrame {
         musicSlider.setToolTipText("");
         musicSlider.setValue(0);
         musicSlider.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        musicSlider.setEnabled(false);
 
         javax.swing.GroupLayout step3PanelLayout = new javax.swing.GroupLayout(step3Panel);
         step3Panel.setLayout(step3PanelLayout);
@@ -302,19 +308,20 @@ public class mainWindow extends javax.swing.JFrame {
         );
         drumTrackPanelLayout.setVerticalGroup(
             drumTrackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
+            .addGap(0, 68, Short.MAX_VALUE)
         );
 
-        drumPartPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        drumElementtPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        drumElementtPanel.setMinimumSize(new java.awt.Dimension(70, 70));
 
-        javax.swing.GroupLayout drumPartPanelLayout = new javax.swing.GroupLayout(drumPartPanel);
-        drumPartPanel.setLayout(drumPartPanelLayout);
-        drumPartPanelLayout.setHorizontalGroup(
-            drumPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 101, Short.MAX_VALUE)
+        javax.swing.GroupLayout drumElementtPanelLayout = new javax.swing.GroupLayout(drumElementtPanel);
+        drumElementtPanel.setLayout(drumElementtPanelLayout);
+        drumElementtPanelLayout.setHorizontalGroup(
+            drumElementtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
         );
-        drumPartPanelLayout.setVerticalGroup(
-            drumPartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        drumElementtPanelLayout.setVerticalGroup(
+            drumElementtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -326,16 +333,16 @@ public class mainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(drumTrackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(drumPartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(drumElementtPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         connectPanelLayout.setVerticalGroup(
             connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, connectPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(drumTrackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(drumPartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(drumElementtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(drumTrackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(47, 47, 47))
         );
 
@@ -364,8 +371,9 @@ public class mainWindow extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(allStepPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addGap(18, 18, 18)
                         .addComponent(connectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButton1)
@@ -431,7 +439,7 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel checkBoxPanel;
     private javax.swing.JPanel connectPanel;
-    private javax.swing.JPanel drumPartPanel;
+    private javax.swing.JPanel drumElementtPanel;
     private javax.swing.JPanel drumTrackPanel;
     private javax.swing.JLabel fooLabel;
     private javax.swing.JButton generateButton;

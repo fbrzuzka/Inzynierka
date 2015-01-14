@@ -14,9 +14,10 @@ import AutoPRK.Controllers.Listeners.StopButtonListener;
 import AutoPRK.Controllers.Listeners.MusicSliderListener;
 import AutoPRK.MidiPlayer.SequencePlayer;
 import AutoPRK.Models.DrumPart;
-import AutoPRK.Models.DrumPartList;
+import AutoPRK.Models.Containers.DrumPartList;
 import AutoPRK.Models.Model;
-import AutoPRK.Models.TrackMap;
+import AutoPRK.Models.Containers.TrackMap;
+import AutoPRK.views.Components.DrumTrackPanelBase;
 import AutoPRK.views.mainWindow;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -72,31 +73,26 @@ public class WindowController {
     }
 
     public void addDrumTrackCheckBoxes(DrumPartList drumTrackElements) {
-        window.getConnectPanel().getDrumPartPanel().setLayout(new GridLayout(0, 1));
         window.getConnectPanel().getDrumTrackPanel().setLayout(new GridLayout(0, 1));
         try {
             for (DrumPart drumElement : drumTrackElements) {
-                JCheckBox checkbox = new JCheckBox(drumElement.getPartName());
-                checkbox.setSelected(false);
-                window.getConnectPanel().getDrumTrackPanel().add(checkbox);
+                JRadioButton radio = new JRadioButton(drumElement.getPartName());
+                radio.setSelected(false);
+                window.getConnectPanel().getDrumTrackPanel().add(radio);
+                window.getConnectPanel().getDrumTrackPanel().getGroup().add(radio);
             }
         } catch (Exception e) {
         }
 
     }
 
-    public void addDrumPartCheckBoxes(List<String> drumPartElements) {
-     //   window.getConnectPanel().getDrumPartPanel().setLayout(new GridLayout(0, 1));
-//        for (String drumElement : drumPartElements) {
-//            JCheckBox checkbox = new JCheckBox(drumElement);
-//            checkbox.setSelected(false);
-//            window.getConnectPanel().getDrumPartPanel().add(checkbox);
-//        }
-        
+    public void addDrumElementRadioButtons(List<String> drumPartElements) {
+        window.getConnectPanel().getDrumElementPanel().setLayout(new GridLayout(0, 1));
         for (String drumElement : drumPartElements) {
             JRadioButton radio = new JRadioButton(drumElement);
             radio.setSelected(false);
-            window.getButtonGroup1().add(radio);
+            window.getConnectPanel().getDrumElementPanel().add(radio);
+            window.getConnectPanel().getDrumElementPanel().getGroup().add(radio);
         }
         
         
@@ -139,7 +135,7 @@ public class WindowController {
             checkbox.setSelected(true);
             addListenerToCheckBox(checkbox);
             window.getCheckBoxPanel().add(checkbox);
-            //   window.getSelectTrackComboBox().addItem(name);
+            //   window.getSelectTrackComboBox().addItem(name);  //mie wiem co z tym ale chyba do wywalenia/
         }
         window.getCheckBoxPanel().repaint();
         window.getPlayPanel().setEnabled(true);
@@ -158,7 +154,10 @@ public class WindowController {
                 window.getCheckBoxPanel().remove(component);
             }
         }
-
+    }
+    
+    public void removeConnectRadioButtons() {
+        //window.getConnectPanel().clear();  //wyłaczyłem bo za bardzo się usuwało.
     }
 
     public void setEnablingOfStep1(Boolean enable) {
@@ -195,4 +194,5 @@ public class WindowController {
         PRKLogger.instance().logToInfoArea("");
 
     }
+
 }

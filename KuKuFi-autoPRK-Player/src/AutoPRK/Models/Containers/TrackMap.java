@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.views.Components;
+package AutoPRK.Models.Containers;
+
+import java.util.LinkedHashMap;
+import javax.sound.midi.Track;
 
 /**
  *
  * @author fbrzuzka
  */
-public class RightDrumPanel extends DrumTrackPanelBase{
+public class TrackMap extends LinkedHashMap<String, Track>{
 
-    public RightDrumPanel() {
+    public TrackMap() {
         super();
     }
     

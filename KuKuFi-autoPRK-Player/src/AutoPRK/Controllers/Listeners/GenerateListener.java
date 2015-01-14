@@ -11,7 +11,7 @@ import AutoPRK.Controllers.WindowController;
 import AutoPRK.Models.Model;
 import AutoPRK.views.mainWindow;
 import AutoPRK.MidiPlayer.SequencePlayer;
-import AutoPRK.Models.TrackMap;
+import AutoPRK.Models.Containers.TrackMap;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
@@ -45,7 +45,7 @@ public class GenerateListener implements ActionListener {
 
         
         WindowController.getInstance().addDrumTrackCheckBoxes(Model.drumTrackElements);
-        WindowController.getInstance().addDrumPartCheckBoxes(Model.drumPartElements);
+        WindowController.getInstance().addDrumElementRadioButtons(Model.drumPartElements);
 
     }
 

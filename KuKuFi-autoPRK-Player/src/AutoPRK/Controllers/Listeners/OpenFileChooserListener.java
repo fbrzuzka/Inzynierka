@@ -40,9 +40,10 @@ public class OpenFileChooserListener implements ActionListener {
             Model.trackSelectedToGenerate = null;
             Model.trackListOriginal.clear();
             WindowController.getInstance().removeCheckBoxesfromChechBoxPanel();
+            WindowController.getInstance().removeConnectRadioButtons();
 
             window.getMidiNameTextField().setText(c.getSelectedFile().getName());
-           WindowController.getInstance().setEnablingOfStep2(true);
+            WindowController.getInstance().setEnablingOfStep2(true);
             model.midiFile = c.getSelectedFile();
 
             Model.sequenceOriginal = ModelCreator.getSequenceFromMidiFile(model.midiFile);

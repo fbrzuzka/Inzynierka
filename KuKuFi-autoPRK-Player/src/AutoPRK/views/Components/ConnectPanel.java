@@ -5,16 +5,19 @@
  */
 package AutoPRK.views.Components;
 
+import AutoPRK.Controllers.PRKLogger;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 /**
  *
  * @author fbrzuzka
  */
-public class ConnectPanel extends JPanel {
+public class ConnectPanel extends JPanel implements ActionListener{
 
-    private JPanel drumTrackPanel;
-    private JPanel drumPartPanel;
+    private DrumTrackPanelBase drumTrackPanel;
+    private DrumTrackPanelBase drumElementtPanel;
 
 
     public ConnectPanel() {
@@ -23,27 +26,38 @@ public class ConnectPanel extends JPanel {
     }
     
     
+    public void clear(){
+        drumElementtPanel.clear();
+        drumTrackPanel.clear();
+    }
+    
+    
+    public ActionListener getActionListener(){
+        
+        return this.getActionListener();
+    }
     
     
     
-    
-    
-    
-    
-    public JPanel getDrumTrackPanel() {
+    public DrumTrackPanelBase getDrumTrackPanel() {
         return drumTrackPanel;
     }
 
-    public void setDrumTrackPanel(JPanel drumTrackPanel) {
+    public void setDrumTrackPanel(DrumTrackPanelBase drumTrackPanel) {
         this.drumTrackPanel = drumTrackPanel;
     }
 
-    public JPanel getDrumPartPanel() {
-        return drumPartPanel;
+    public DrumTrackPanelBase getDrumElementPanel() {
+        return drumElementtPanel;
     }
 
-    public void setDrumPartPanel(JPanel drumPartPanel) {
-        this.drumPartPanel = drumPartPanel;
+    public void setDrumElementPanel(DrumTrackPanelBase drumPartPanel) {
+        this.drumElementtPanel = drumPartPanel;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        PRKLogger.instance().logToInfoArea("lajfljhdsfljshgdlfksgd");
     }
     
 }

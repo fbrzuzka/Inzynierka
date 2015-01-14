@@ -2,7 +2,7 @@ package AutoPRK.Controllers;
 
 import AutoPRK.Models.ByteNote;
 import AutoPRK.Models.DrumPart;
-import AutoPRK.Models.DrumPartList;
+import AutoPRK.Models.Containers.DrumPartList;
 import AutoPRK.Models.DrumPartListSingleton;
 import com.sun.org.apache.xalan.internal.lib.ExsltMath;
 import java.io.File;
@@ -19,9 +19,9 @@ import javax.sound.midi.Sequence;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
-import AutoPRK.Models.ProtocolListHashMap;
+import AutoPRK.Models.Containers.ProtocolListHashMap;
 import AutoPRK.Models.Model;
-import AutoPRK.Models.SingleDrumElementTimelineArray;
+import AutoPRK.Models.Containers.SingleDrumElementTimelineArray;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;

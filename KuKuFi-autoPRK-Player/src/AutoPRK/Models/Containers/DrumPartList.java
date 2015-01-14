@@ -3,16 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.views.Components;
+package AutoPRK.Models.Containers;
+
+import AutoPRK.Models.DrumPart;
+import java.util.ArrayList;
 
 /**
  *
  * @author fbrzuzka
  */
-public class RightDrumPanel extends DrumTrackPanelBase{
+public class DrumPartList extends ArrayList<DrumPart>{
 
-    public RightDrumPanel() {
+    public DrumPartList() {
         super();
     }
+    
     
 }
