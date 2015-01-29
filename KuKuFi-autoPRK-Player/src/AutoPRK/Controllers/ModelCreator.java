@@ -1,10 +1,8 @@
 package AutoPRK.Controllers;
 
-import AutoPRK.Models.ByteNote;
 import AutoPRK.Models.DrumPart;
 import AutoPRK.Models.Containers.DrumPartList;
 import AutoPRK.Models.DrumPartListSingleton;
-import com.sun.org.apache.xalan.internal.lib.ExsltMath;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -22,6 +20,7 @@ import javax.sound.midi.Track;
 import AutoPRK.Models.Containers.ProtocolListHashMap;
 import AutoPRK.Models.Model;
 import AutoPRK.Models.Containers.SingleDrumElementTimelineArray;
+import com.sun.org.apache.xalan.internal.lib.ExsltMath;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +34,10 @@ public class ModelCreator {
     public ModelCreator() {
         Model.protocolList = new ProtocolListHashMap();
        
-       // setAllTracks(model.sequenceOriginal);
-        setSDontRememberWhat(Model.trackSelectedToGenerate);
-        // echoInfoAboutModel(model.sequenceOriginal);
+      //  setAllTracks(model.sequenceOriginal);
+        setResolutionInMs(Model.sequenceOriginal);
+       // setSDontRememberWhat(Model.trackSelectedToGenerate);
+         echoInfoAboutModel();
         //parseTrackToArrayList(model.trackSelectedToGenerate);
         Model.protocolList = newParseToHashMap(model.trackSelectedToGenerate);
 
@@ -54,14 +54,15 @@ public class ModelCreator {
         Model.drumTrackElements  = findElementOfDrumKit(track);
 
         for (DrumPart drumKitElement : Model.drumTrackElements) {
-            rc.put(drumKitElement, new SingleDrumElementTimelineArray(drumKitElement));
+            rc.put(drumKitElement.getPartName(), new SingleDrumElementTimelineArray(drumKitElement));
         }
 
         for (int i = 0; i < track.size(); i++) {
             MidiEvent event = track.get(i);
 
-            double tickInMs = (event.getTick() * model.milis)/1000;
-            double tempoTickInMs = tickInMs * model.tempo;
+           // double tickInMs = (event.getTick() * model.milis)/1000;
+            
+            int tempoTickInMs = (int)((event.getTick() * model.milis*1000)/1000);
             MidiMessage message = event.getMessage();
             if (message instanceof ShortMessage) {
                 ShortMessage sm = (ShortMessage) message;
@@ -75,7 +76,7 @@ public class ModelCreator {
                     System.out.println(" velocity: " + velocity + DrumPartListSingleton.getInstance().get(key).toString());
 
                     DrumPart drumPart = DrumPartListSingleton.getInstance().get(key);
-                    rc.get(drumPart).add(tempoTickInMs);
+                    rc.get(drumPart.getPartName()).add(tempoTickInMs);
                     
                 }
             }
@@ -128,9 +129,15 @@ public class ModelCreator {
         }
     }
 
-    private void setSDontRememberWhat(Track track) {
+
+    private void setResolutionInMs(Sequence seq) {
+        int longestTrack = -10;
+        for (Track tr : seq.getTracks()) {
+        }
+        
         model.milis = model.sequenceOriginal.getMicrosecondLength() / (model.sequenceOriginal.getTickLength() * 1000.0);
-        model.PPQ = model.sequenceOriginal.getResolution();
+    }
+    private void setSDontRememberWhat(Track track) {
 
         Double min = model.minimalNoteMsLength;
         double oldTicksms = 0;

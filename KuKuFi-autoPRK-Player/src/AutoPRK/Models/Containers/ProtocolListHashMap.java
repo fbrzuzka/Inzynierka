@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
  *
  * @author fbrzuzka
  */
-public class ProtocolListHashMap extends LinkedHashMap<DrumPart, SingleDrumElementTimelineArray> {
+public class ProtocolListHashMap extends LinkedHashMap<String, SingleDrumElementTimelineArray> {
 
     public ProtocolListHashMap() {
         super();
@@ -23,7 +23,7 @@ public class ProtocolListHashMap extends LinkedHashMap<DrumPart, SingleDrumEleme
     public String toString() {
         String rc = "\n";
 
-        for (DrumPart dr : this.keySet()) {
+        for (String dr : this.keySet()) {
             rc += dr + " (" +this.get(dr).size() + ") : " +  this.get(dr).toString() + "\n";
         }
         return rc;

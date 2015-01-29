@@ -6,6 +6,7 @@
 package AutoPRK.Controllers.Listeners;
 
 import AutoPRK.Controllers.WindowController;
+import AutoPRK.MessageController.Message.SimpleMessage;
 import AutoPRK.Models.Model;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,9 +23,9 @@ public class PauseButtonListener implements ActionListener{
         
         WindowController.getInstance().setEnablingOfStep1(Boolean.TRUE);
         WindowController.getInstance().setEnablingOfStep2(Boolean.TRUE);
+        WindowController.getInstance().setEnablingOfStep3(Boolean.TRUE);
         
-        char[] pause = {103};
-        Model.serialPortTransmiter.sendData(new String(pause));
+        Model.serialPortTransmiter.sendData(new SimpleMessage((byte)101, (byte)112));
     }
     
 }

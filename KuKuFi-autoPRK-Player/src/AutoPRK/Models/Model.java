@@ -37,7 +37,7 @@ public class Model {
     public static Sequence sequenceOriginal;
     public static Track trackSelectedToGenerate;
     public static DrumPartList drumTrackElements;
-    public static List<String> drumPartElements;
+    public static List<String> drumKitPartElements;
     public static ProtocolListHashMap protocolList = null;
     public static ConnectConfiguration connectConfig;
 
@@ -58,17 +58,19 @@ public class Model {
         trackListOriginal = new TrackMap();
         trackListToPlayFromSpeakers = new TrackMap();
         serialPortTransmiter = new SerialPortTransmiter();
-        drumPartElements = new ArrayList<>();
-        drumPartElements.add("ramię 1");
-        drumPartElements.add("ramię 2");
-        drumPartElements.add("ramię 3");
-        drumPartElements.add("ramię 4");
-        drumPartElements.add("ramię 5");
-        drumPartElements.add("ramię 6");
-        drumPartElements.add("ramię 7");
-        drumPartElements.add("ramię 8");
-        drumPartElements.add("stopa");
-        drumPartElements.add("stopa hi-hat");
+        connectConfig = new ConnectConfiguration();
+        
+        drumKitPartElements = new ArrayList<>();    
+        drumKitPartElements.add("1");
+        drumKitPartElements.add("2");
+        drumKitPartElements.add("3");
+        drumKitPartElements.add("4");
+        drumKitPartElements.add("5");
+        drumKitPartElements.add("6");
+        drumKitPartElements.add("7");
+        drumKitPartElements.add("8");
+        drumKitPartElements.add("9");   
+        drumKitPartElements.add("10"); 
     }
 
     public static Model instanceOf() {

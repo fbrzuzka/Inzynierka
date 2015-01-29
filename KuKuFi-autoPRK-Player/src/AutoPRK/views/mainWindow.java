@@ -11,6 +11,7 @@
 package AutoPRK.views;
 
 import AutoPRK.Controllers.WindowController;
+import AutoPRK.MessageController.MapOfPacketTypes;
 import AutoPRK.Models.Model;
 import AutoPRK.Models.MusicSlider;
 import AutoPRK.views.Components.ConnectPanel;
@@ -18,6 +19,7 @@ import AutoPRK.views.Components.DrumTrackPanelBase;
 import AutoPRK.views.Components.LeftElementPanel;
 import AutoPRK.views.Components.RightDrumPanel;
 import java.awt.GridLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.plaf.metal.MetalSliderUI;
@@ -48,8 +50,6 @@ public class mainWindow extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         mainPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        infoArea = new javax.swing.JTextArea();
         allStepPanel = new javax.swing.JPanel();
         step2Panel = new javax.swing.JPanel();
         generateButton = new javax.swing.JButton();
@@ -59,7 +59,7 @@ public class mainWindow extends javax.swing.JFrame {
         openButton = new javax.swing.JButton();
         midiNameTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        step3Panel = new javax.swing.JPanel();
+        step4Panel = new javax.swing.JPanel();
         playButton = new javax.swing.JButton();
         pauseButton = new javax.swing.JButton();
         stopButton = new javax.swing.JButton();
@@ -69,25 +69,30 @@ public class mainWindow extends javax.swing.JFrame {
         checkBoxPanel = new javax.swing.JPanel();
         fooLabel = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
+        step3Panel = new javax.swing.JPanel();
         connectPanel = new ConnectPanel();
         drumTrackPanel = new AutoPRK.views.Components.LeftElementPanel();
         ;
         ((ConnectPanel)connectPanel).setDrumTrackPanel((DrumTrackPanelBase)drumTrackPanel);
+        jSeparator1 = new javax.swing.JSeparator();
         drumElementtPanel = new RightDrumPanel();
         ;
         ((ConnectPanel)connectPanel).setDrumElementPanel((DrumTrackPanelBase)drumElementtPanel);
+        jSeparator2 = new javax.swing.JSeparator();
+        resetConfiguration = new javax.swing.JButton();
+        loadConfButton = new javax.swing.JButton();
+        saveConfButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        infoArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocationByPlatform(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
-
-        infoArea.setColumns(20);
-        infoArea.setRows(5);
-        jScrollPane1.setViewportView(infoArea);
 
         step2Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
@@ -99,7 +104,7 @@ public class mainWindow extends javax.swing.JFrame {
         selectTrackComboBox.setEnabled(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel1.setText("2. Select track from midi, then press \"Generate\"");
+        jLabel1.setText("2. Select !_DRUM_! track from midi, then press \"Generate\"");
 
         javax.swing.GroupLayout step2PanelLayout = new javax.swing.GroupLayout(step2Panel);
         step2Panel.setLayout(step2PanelLayout);
@@ -107,11 +112,13 @@ public class mainWindow extends javax.swing.JFrame {
             step2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(step2PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(step2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(selectTrackComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(generateButton)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(step2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(step2PanelLayout.createSequentialGroup()
+                        .addComponent(selectTrackComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(generateButton)))
+                .addContainerGap())
         );
         step2PanelLayout.setVerticalGroup(
             step2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,10 +126,10 @@ public class mainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(selectTrackComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(generateButton)
-                .addGap(85, 85, 85))
+                .addGroup(step2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectTrackComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(generateButton))
+                .addGap(111, 111, 111))
         );
 
         step1Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -166,7 +173,7 @@ public class mainWindow extends javax.swing.JFrame {
 
         midiNameTextField.getAccessibleContext().setAccessibleName("");
 
-        step3Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        step4Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         playButton.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         playButton.setText("play");
@@ -181,7 +188,7 @@ public class mainWindow extends javax.swing.JFrame {
         stopButton.setEnabled(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel2.setText("3. Enjoy!");
+        jLabel2.setText("4. Enjoy!");
 
         musicSlider.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
         musicSlider.setMajorTickSpacing(2);
@@ -190,41 +197,6 @@ public class mainWindow extends javax.swing.JFrame {
         musicSlider.setValue(0);
         musicSlider.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         musicSlider.setEnabled(false);
-
-        javax.swing.GroupLayout step3PanelLayout = new javax.swing.GroupLayout(step3Panel);
-        step3Panel.setLayout(step3PanelLayout);
-        step3PanelLayout.setHorizontalGroup(
-            step3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, step3PanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(playButton)
-                .addGap(27, 27, 27)
-                .addComponent(pauseButton)
-                .addGap(18, 18, 18)
-                .addComponent(stopButton)
-                .addGap(26, 26, 26))
-            .addGroup(step3PanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(step3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(step3PanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(musicSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        step3PanelLayout.setVerticalGroup(
-            step3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, step3PanelLayout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(step3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(playButton)
-                    .addComponent(pauseButton)
-                    .addComponent(stopButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(musicSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
 
         playPanel.setEnabled(false);
 
@@ -236,7 +208,7 @@ public class mainWindow extends javax.swing.JFrame {
         );
         checkBoxPanelLayout.setVerticalGroup(
             checkBoxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 4, Short.MAX_VALUE)
         );
 
         fooLabel.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
@@ -250,7 +222,7 @@ public class mainWindow extends javax.swing.JFrame {
             .addGroup(playPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(playPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fooLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fooLabel)
                     .addComponent(checkBoxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -258,9 +230,170 @@ public class mainWindow extends javax.swing.JFrame {
             playPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(playPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(fooLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fooLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkBoxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(checkBoxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout step4PanelLayout = new javax.swing.GroupLayout(step4Panel);
+        step4Panel.setLayout(step4PanelLayout);
+        step4PanelLayout.setHorizontalGroup(
+            step4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(step4PanelLayout.createSequentialGroup()
+                .addGroup(step4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(step4PanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(step4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(step4PanelLayout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(musicSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(step4PanelLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(playPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, step4PanelLayout.createSequentialGroup()
+                .addGap(0, 64, Short.MAX_VALUE)
+                .addComponent(playButton)
+                .addGap(27, 27, 27)
+                .addComponent(pauseButton)
+                .addGap(18, 18, 18)
+                .addComponent(stopButton)
+                .addGap(63, 63, 63))
+        );
+        step4PanelLayout.setVerticalGroup(
+            step4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, step4PanelLayout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(step4PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(playButton)
+                    .addComponent(pauseButton)
+                    .addComponent(stopButton))
+                .addGap(11, 11, 11)
+                .addComponent(musicSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(playPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jRadioButton1.setText("włącz serial USB");
+
+        step3Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        javax.swing.GroupLayout drumTrackPanelLayout = new javax.swing.GroupLayout(drumTrackPanel);
+        drumTrackPanel.setLayout(drumTrackPanelLayout);
+        drumTrackPanelLayout.setHorizontalGroup(
+            drumTrackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(drumTrackPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        drumTrackPanelLayout.setVerticalGroup(
+            drumTrackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(drumTrackPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(165, Short.MAX_VALUE))
+        );
+
+        drumElementtPanel.setMinimumSize(new java.awt.Dimension(70, 70));
+
+        javax.swing.GroupLayout drumElementtPanelLayout = new javax.swing.GroupLayout(drumElementtPanel);
+        drumElementtPanel.setLayout(drumElementtPanelLayout);
+        drumElementtPanelLayout.setHorizontalGroup(
+            drumElementtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(drumElementtPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        drumElementtPanelLayout.setVerticalGroup(
+            drumElementtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(drumElementtPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        resetConfiguration.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        resetConfiguration.setText("reset");
+
+        loadConfButton.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        loadConfButton.setText("load configuration");
+
+        saveConfButton.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        saveConfButton.setText("save configuration");
+
+        javax.swing.GroupLayout connectPanelLayout = new javax.swing.GroupLayout(connectPanel);
+        connectPanel.setLayout(connectPanelLayout);
+        connectPanelLayout.setHorizontalGroup(
+            connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(connectPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(connectPanelLayout.createSequentialGroup()
+                        .addComponent(drumTrackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(drumElementtPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, connectPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(saveConfButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(loadConfButton)
+                        .addGap(10, 10, 10)
+                        .addComponent(resetConfiguration)))
+                .addContainerGap())
+        );
+        connectPanelLayout.setVerticalGroup(
+            connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(connectPanelLayout.createSequentialGroup()
+                .addGroup(connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resetConfiguration)
+                    .addComponent(loadConfButton)
+                    .addComponent(saveConfButton))
+                .addGroup(connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(connectPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(drumElementtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(connectPanelLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(drumTrackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel4.setText("3. Connect audio drum elements with autoPRK parts");
+
+        jButton1.setText("ok");
+
+        javax.swing.GroupLayout step3PanelLayout = new javax.swing.GroupLayout(step3Panel);
+        step3Panel.setLayout(step3PanelLayout);
+        step3PanelLayout.setHorizontalGroup(
+            step3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, step3PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(step3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(connectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(step3PanelLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addContainerGap())
+        );
+        step3PanelLayout.setVerticalGroup(
+            step3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(step3PanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(step3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(connectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -271,126 +404,73 @@ public class mainWindow extends javax.swing.JFrame {
             .addGroup(allStepPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(allStepPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(step1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(step3Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(step2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(playPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(step2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(step1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGroup(allStepPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allStepPanelLayout.createSequentialGroup()
+                        .addComponent(step4Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allStepPanelLayout.createSequentialGroup()
+                        .addComponent(jRadioButton1)
+                        .addGap(157, 157, 157))))
         );
         allStepPanelLayout.setVerticalGroup(
             allStepPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allStepPanelLayout.createSequentialGroup()
+            .addGroup(allStepPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(step1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(allStepPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(allStepPanelLayout.createSequentialGroup()
+                        .addComponent(step4Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jRadioButton1))
+                    .addGroup(allStepPanelLayout.createSequentialGroup()
+                        .addComponent(step1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(step2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(step3Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(playPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(step3Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(91, 91, 91))
         );
 
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jRadioButton1.setText("włącz serial USB");
-
-        connectPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-
-        drumTrackPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout drumTrackPanelLayout = new javax.swing.GroupLayout(drumTrackPanel);
-        drumTrackPanel.setLayout(drumTrackPanelLayout);
-        drumTrackPanelLayout.setHorizontalGroup(
-            drumTrackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 86, Short.MAX_VALUE)
-        );
-        drumTrackPanelLayout.setVerticalGroup(
-            drumTrackPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 68, Short.MAX_VALUE)
-        );
-
-        drumElementtPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        drumElementtPanel.setMinimumSize(new java.awt.Dimension(70, 70));
-
-        javax.swing.GroupLayout drumElementtPanelLayout = new javax.swing.GroupLayout(drumElementtPanel);
-        drumElementtPanel.setLayout(drumElementtPanelLayout);
-        drumElementtPanelLayout.setHorizontalGroup(
-            drumElementtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
-        );
-        drumElementtPanelLayout.setVerticalGroup(
-            drumElementtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout connectPanelLayout = new javax.swing.GroupLayout(connectPanel);
-        connectPanel.setLayout(connectPanelLayout);
-        connectPanelLayout.setHorizontalGroup(
-            connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(connectPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(drumTrackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(drumElementtPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        connectPanelLayout.setVerticalGroup(
-            connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, connectPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(connectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(drumElementtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(drumTrackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(47, 47, 47))
-        );
+        infoArea.setColumns(20);
+        infoArea.setRows(5);
+        jScrollPane1.setViewportView(infoArea);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(allStepPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
-                            .addComponent(connectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(jRadioButton1)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(allStepPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(allStepPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(connectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton1)
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(allStepPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         pack();
@@ -434,6 +514,7 @@ public class mainWindow extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel allStepPanel;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -444,11 +525,16 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel fooLabel;
     private javax.swing.JButton generateButton;
     private javax.swing.JTextArea infoArea;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JButton loadConfButton;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTextField midiNameTextField;
     private javax.swing.JSlider musicSlider;
@@ -456,14 +542,16 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JButton pauseButton;
     private javax.swing.JButton playButton;
     private javax.swing.JPanel playPanel;
+    private javax.swing.JButton resetConfiguration;
+    private javax.swing.JButton saveConfButton;
     private javax.swing.JComboBox selectTrackComboBox;
     private javax.swing.JPanel step1Panel;
     private javax.swing.JPanel step2Panel;
     private javax.swing.JPanel step3Panel;
+    private javax.swing.JPanel step4Panel;
     private javax.swing.JButton stopButton;
     // End of variables declaration//GEN-END:variables
 
-    
     
 
     /**
@@ -552,6 +640,34 @@ public class mainWindow extends javax.swing.JFrame {
      */
     public javax.swing.ButtonGroup getButtonGroup1() {
         return buttonGroup1;
+    }
+
+    public javax.swing.JButton getLoadConfButton() {
+        return loadConfButton;
+    }
+
+    public javax.swing.JButton getSaveConfButton() {
+        return saveConfButton;
+    }
+
+    public javax.swing.JButton getResetConfiguration() {
+        return resetConfiguration;
+    }
+
+    public javax.swing.JPanel getStep1Panel() {
+        return step1Panel;
+    }
+
+    public javax.swing.JPanel getStep2Panel() {
+        return step2Panel;
+    }
+    
+    public javax.swing.JPanel getStep3Panel() {
+        return step3Panel;
+    }
+
+    public javax.swing.JPanel getStep4Panel() {
+        return step4Panel;
     }
 
 }

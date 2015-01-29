@@ -12,10 +12,11 @@ import java.util.ArrayList;
  *
  * @author fbrzuzka
  */
+public class SingleDrumElementTimelineArray extends ArrayList<Integer> {
 
-public class SingleDrumElementTimelineArray extends ArrayList<Double>{
     private DrumPart drumPart;
-    public SingleDrumElementTimelineArray(DrumPart drumPart){
+
+    public SingleDrumElementTimelineArray(DrumPart drumPart) {
         super();
         this.drumPart = drumPart;
     }
@@ -26,6 +27,21 @@ public class SingleDrumElementTimelineArray extends ArrayList<Double>{
     public DrumPart getDrumPart() {
         return drumPart;
     }
+
+    public int[] get8IntsToArduino(int index) {
+        int[] rc = new int[8];
+        for (int i = 0; i < 8; i++) {
+            if (index + i >= this.size()) {
+                rc[i] = 0;
+            } else {
+                rc[i] = this.get(index + i);
+            }
+        }
+
+        return rc;
+    }
+
+}
 //      public String drToArduino(int limit){
 //        String rc = "{ " + this.get(0) + ",\t";
 //        for(int i=1 ; i < this.size() - 1 ; i++) {
@@ -37,9 +53,7 @@ public class SingleDrumElementTimelineArray extends ArrayList<Double>{
 //          rc += "}";
 //        return rc;
 //    }
-    
-}
-
+//
 //public class SingleDrumElementTimelineArray extends ArrayList<ByteNote>{
 //    private DrumPart drumPart;
 //    public SingleDrumElementTimelineArray(DrumPart drumPart){

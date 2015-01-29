@@ -11,13 +11,9 @@ import AutoPRK.Controllers.WindowController;
 import AutoPRK.Models.Model;
 import AutoPRK.views.mainWindow;
 import AutoPRK.MidiPlayer.SequencePlayer;
-import AutoPRK.Models.Containers.TrackMap;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.sound.midi.Track;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 
 /**
@@ -42,10 +38,15 @@ public class GenerateListener implements ActionListener {
         WindowController.getInstance().setEnablingOfStep3(true);
         WindowController.getInstance().echoFewImportantInfoOnInfoArea();
         WindowController.getInstance().setMaxOnMusicSlider((int) (Model.sequenceOriginal.getMicrosecondLength() / 1000000));
-
         
-        WindowController.getInstance().addDrumTrackCheckBoxes(Model.drumTrackElements);
-        WindowController.getInstance().addDrumElementRadioButtons(Model.drumPartElements);
+        
+        WindowController.getInstance().addDrumTrackRadioButtons(Model.drumTrackElements);
+        WindowController.getInstance().addDrumKitElementRadioButtons(Model.drumKitPartElements);
+        
+        
+        mainWindow.window.getStep3Panel().repaint();
+        mainWindow.window.pack();
+
 
     }
 

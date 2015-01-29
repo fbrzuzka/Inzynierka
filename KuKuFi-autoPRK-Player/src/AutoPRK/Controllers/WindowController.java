@@ -12,19 +12,24 @@ import AutoPRK.Controllers.Listeners.PauseButtonListener;
 import AutoPRK.Controllers.Listeners.PlayButtonListener;
 import AutoPRK.Controllers.Listeners.StopButtonListener;
 import AutoPRK.Controllers.Listeners.MusicSliderListener;
+import AutoPRK.Controllers.Listeners.LoadConfListener;
+import AutoPRK.Controllers.Listeners.ResetConfListener;
+import AutoPRK.Controllers.Listeners.SaveConfListener;
 import AutoPRK.MidiPlayer.SequencePlayer;
+import AutoPRK.Models.Containers.ConnectConfiguration;
 import AutoPRK.Models.DrumPart;
 import AutoPRK.Models.Containers.DrumPartList;
 import AutoPRK.Models.Model;
 import AutoPRK.Models.Containers.TrackMap;
-import AutoPRK.views.Components.DrumTrackPanelBase;
 import AutoPRK.views.mainWindow;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.GridLayout;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 /**
@@ -70,9 +75,13 @@ public class WindowController {
         });
 
         thread.start();
+
+        setEnablingOfStep2(false);
+        setEnablingOfStep3(false);
+        setEnablingOfStep4(false);
     }
 
-    public void addDrumTrackCheckBoxes(DrumPartList drumTrackElements) {
+    public void addDrumTrackRadioButtons(DrumPartList drumTrackElements) {
         window.getConnectPanel().getDrumTrackPanel().setLayout(new GridLayout(0, 1));
         try {
             for (DrumPart drumElement : drumTrackElements) {
@@ -80,22 +89,32 @@ public class WindowController {
                 radio.setSelected(false);
                 window.getConnectPanel().getDrumTrackPanel().add(radio);
                 window.getConnectPanel().getDrumTrackPanel().getGroup().add(radio);
+                radio.addActionListener(window.getConnectPanel());
+                PRKLogger.instance().logToInfoArea(Integer.toString(window.getConnectPanel().getDrumTrackPanel().getComponentZOrder(radio)));
+
             }
         } catch (Exception e) {
         }
 
     }
 
-    public void addDrumElementRadioButtons(List<String> drumPartElements) {
-        window.getConnectPanel().getDrumElementPanel().setLayout(new GridLayout(0, 1));
+    public void removeDrumTrackRadioButtons() {
+
+    }
+
+    public void removeDrumKitElementRadioButtons() {
+
+    }
+
+    public void addDrumKitElementRadioButtons(List<String> drumPartElements) {
+        window.getConnectPanel().getDrumKitElementPanel().setLayout(new GridLayout(0, 1));
         for (String drumElement : drumPartElements) {
             JRadioButton radio = new JRadioButton(drumElement);
             radio.setSelected(false);
-            window.getConnectPanel().getDrumElementPanel().add(radio);
-            window.getConnectPanel().getDrumElementPanel().getGroup().add(radio);
+            window.getConnectPanel().getDrumKitElementPanel().add(radio);
+            window.getConnectPanel().getDrumKitElementPanel().getGroup().add(radio);
+            radio.addActionListener(window.getConnectPanel());
         }
-        
-        
 
     }
 
@@ -108,6 +127,10 @@ public class WindowController {
         MusicSliderListener msl = new MusicSliderListener();
         window.getMusicSlider().addChangeListener(msl);
         window.getMusicSlider().addMouseListener(msl);
+        window.getLoadConfButton().addActionListener(new LoadConfListener());
+        window.getSaveConfButton().addActionListener(new SaveConfListener());
+        window.getResetConfiguration().addActionListener(new ResetConfListener());
+
     }
 
     public void setMaxOnMusicSlider(int max) {
@@ -125,7 +148,6 @@ public class WindowController {
             window.getSelectTrackComboBox().addItem(name);
         }
         window.getSelectTrackComboBox().setEnabled(true);
-
     }
 
     public void addSomeCheckBoxIntoCheckBoxPanel(TrackMap trackMap) {
@@ -133,13 +155,12 @@ public class WindowController {
         for (String name : trackMap.keySet()) {
             JCheckBox checkbox = new JCheckBox(name);
             checkbox.setSelected(true);
+            checkbox.setEnabled(false);
             addListenerToCheckBox(checkbox);
             window.getCheckBoxPanel().add(checkbox);
             //   window.getSelectTrackComboBox().addItem(name);  //mie wiem co z tym ale chyba do wywalenia/
         }
         window.getCheckBoxPanel().repaint();
-        window.getPlayPanel().setEnabled(true);
-
     }
 
     private void addListenerToCheckBox(JCheckBox checkbox) {
@@ -155,28 +176,37 @@ public class WindowController {
             }
         }
     }
-    
+
     public void removeConnectRadioButtons() {
-        //window.getConnectPanel().clear();  //wyłaczyłem bo za bardzo się usuwało.
+        window.getConnectPanel().clear();  //wyłaczyłem bo za bardzo się usuwało.
+        Model.connectConfig = new ConnectConfiguration();
+        //   window.getConnectPanel().repaint();
     }
 
     public void setEnablingOfStep1(Boolean enable) {
-        window.getOpenButton().setEnabled(enable);
-        window.getMidiNameTextField().setEnabled(enable);
+        setEnableInContainer(window.getStep1Panel(), enable);
     }
 
     public void setEnablingOfStep2(Boolean enable) {
-
-        window.getSelectTrackComboBox().setEnabled(enable);
-        window.getGenerateButton().setEnabled(enable);
+        setEnableInContainer(window.getStep2Panel(), enable);
     }
 
     public void setEnablingOfStep3(Boolean enable) {
+        setEnableInContainer(window.getStep3Panel(), enable);
+    }
 
-        window.getPlayButton().setEnabled(enable);
-        window.getPauseButton().setEnabled(enable);
-        window.getStopButton().setEnabled(enable);
-        window.getMusicSlider().setEnabled(enable);
+    public void setEnablingOfStep4(Boolean enable) {
+        setEnableInContainer(window.getStep4Panel(), enable);
+    }
+
+    public void setEnableInContainer(Container container, Boolean enable) {
+        for (Component component : container.getComponents()) {
+            if (component instanceof Container) {
+                Container container2 = (Container) component;
+                setEnableInContainer(container2, enable);
+            }
+            component.setEnabled(enable);
+        }
     }
 
     public void echoFewImportantInfoOnInfoArea() {
@@ -193,6 +223,22 @@ public class WindowController {
         PRKLogger.instance().logToInfoArea("milis: " + model.milis);
         PRKLogger.instance().logToInfoArea("");
 
+    }
+
+    public void setDrumTrackAsSelected() {
+         for(int i=0 ; i < window.getSelectTrackComboBox().getItemCount() ; i++){
+             if(window.getSelectTrackComboBox().getItemAt(i).toString().toUpperCase().contains("DRUM")){
+                 window.getSelectTrackComboBox().setSelectedIndex(i);
+                 break;
+             }
+         }
+    }
+
+    public void showWarningDialog() {
+        JOptionPane.showMessageDialog(window,
+                    "autoPRK is not connected to USB port or port is in use.\n Please unplug autoPRK from USB and then plug it again.",
+                    "Inane warning",
+                    JOptionPane.WARNING_MESSAGE);
     }
 
 }

@@ -7,30 +7,35 @@ package AutoPRK.Models.Containers;
 
 import AutoPRK.Models.DrumPart;
 
+
 /**
  *
  * @author fbrzuzka
  */
 public class ConfPair{
 
-    private String drumElement;
+    private String drumKitElement;
     private DrumPart drumPart;
-    
-    public ConfPair(String drumElement, DrumPart drunpart) {
-        this.drumElement = drumElement;
-        this.drumPart = drunpart;
+
+    public ConfPair(String drumKitElement, DrumPart drumPart) {
+        this.drumKitElement = drumKitElement;
+        this.drumPart = drumPart;
     }
     
-    
+    @Override
+    public String toString(){
+        return "wybrałeś parę: " + drumKitElement + ", " + drumPart.getPartName();
+        
+    }
 
-    public String getDrumElement() {
-        return drumElement;
+    
+    public String getDrumKitElement() {
+        return drumKitElement;
     }
 
     public DrumPart getDrumPart() {
         return drumPart;
     }
-    
     
     
 }
