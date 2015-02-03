@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.Exceptions;
+package AutoPRK.Models.Message;
 
 /**
  *
  * @author fbrzuzka
  */
-public class InitlializeWindowControllerException extends Exception{
-
-    public InitlializeWindowControllerException() {
-        super();
-    }
+public abstract class Message {
     
+    protected byte type;
     
+    public abstract byte[] toSend();
 }

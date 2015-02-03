@@ -11,7 +11,7 @@
 package AutoPRK.views;
 
 import AutoPRK.Controllers.WindowController;
-import AutoPRK.MessageController.MapOfPacketTypes;
+import AutoPRK.Controllers.MessageController.MapOfPacketTypes;
 import AutoPRK.Models.Model;
 import AutoPRK.Models.MusicSlider;
 import AutoPRK.views.Components.ConnectPanel;
@@ -68,7 +68,6 @@ public class mainWindow extends javax.swing.JFrame {
         playPanel = new javax.swing.JPanel();
         checkBoxPanel = new javax.swing.JPanel();
         fooLabel = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
         step3Panel = new javax.swing.JPanel();
         connectPanel = new ConnectPanel();
         drumTrackPanel = new AutoPRK.views.Components.LeftElementPanel();
@@ -83,7 +82,6 @@ public class mainWindow extends javax.swing.JFrame {
         loadConfButton = new javax.swing.JButton();
         saveConfButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         infoArea = new javax.swing.JTextArea();
 
@@ -279,9 +277,6 @@ public class mainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jRadioButton1.setText("włącz serial USB");
-
         step3Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         javax.swing.GroupLayout drumTrackPanelLayout = new javax.swing.GroupLayout(drumTrackPanel);
@@ -369,8 +364,6 @@ public class mainWindow extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel4.setText("3. Connect audio drum elements with autoPRK parts");
 
-        jButton1.setText("ok");
-
         javax.swing.GroupLayout step3PanelLayout = new javax.swing.GroupLayout(step3Panel);
         step3Panel.setLayout(step3PanelLayout);
         step3PanelLayout.setHorizontalGroup(
@@ -381,17 +374,14 @@ public class mainWindow extends javax.swing.JFrame {
                     .addComponent(connectPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(step3PanelLayout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addGap(47, 47, 47)))
                 .addContainerGap())
         );
         step3PanelLayout.setVerticalGroup(
             step3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(step3PanelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(step3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(connectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -408,13 +398,8 @@ public class mainWindow extends javax.swing.JFrame {
                     .addComponent(step2Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(step1Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addGroup(allStepPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allStepPanelLayout.createSequentialGroup()
-                        .addComponent(step4Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, allStepPanelLayout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addGap(157, 157, 157))))
+                .addComponent(step4Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         allStepPanelLayout.setVerticalGroup(
             allStepPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,8 +408,7 @@ public class mainWindow extends javax.swing.JFrame {
                 .addGroup(allStepPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(allStepPanelLayout.createSequentialGroup()
                         .addComponent(step4Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButton1))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(allStepPanelLayout.createSequentialGroup()
                         .addComponent(step1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -525,12 +509,10 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel fooLabel;
     private javax.swing.JButton generateButton;
     private javax.swing.JTextArea infoArea;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;

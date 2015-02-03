@@ -5,7 +5,7 @@
  */
 package AutoPRK.Controllers.Listeners;
 
-import AutoPRK.Controllers.ModelCreator;
+import AutoPRK.Controllers.Factory.ModelCreator;
 import AutoPRK.Controllers.WindowController;
 import AutoPRK.Models.Model;
 import AutoPRK.views.mainWindow;

@@ -217,9 +217,6 @@ public class WindowController {
         PRKLogger.instance().logToInfoArea("number of ticks:  " + Model.sequenceOriginal.getTickLength());
         PRKLogger.instance().logToInfoArea("lenght in ms:  " + Model.sequenceOriginal.getMicrosecondLength());
         PRKLogger.instance().logToInfoArea("length in second: " + (double) Model.sequenceOriginal.getMicrosecondLength() / 1000000);
-        PRKLogger.instance().logToInfoArea("??sequence.getResolution()??: " + model.PPQ);
-        PRKLogger.instance().logToInfoArea("minimal Note Length in ms: " + model.minimalNoteMsLength);
-        PRKLogger.instance().logToInfoArea("tempo: " + model.tempo);
         PRKLogger.instance().logToInfoArea("milis: " + model.milis);
         PRKLogger.instance().logToInfoArea("");
 

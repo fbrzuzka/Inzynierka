@@ -3,7 +3,7 @@ package AutoPRK.Models;
 import AutoPRK.Models.Containers.TrackMap;
 import AutoPRK.Models.Containers.ProtocolListHashMap;
 import AutoPRK.Models.Containers.DrumPartList;
-import AutoPRK.MessageController.SerialPortTransmiter;
+import AutoPRK.Controllers.MessageController.SerialPortTransmiter;
 import AutoPRK.MidiPlayer.*;
 import AutoPRK.Models.Containers.ConnectConfiguration;
 import java.io.File;
@@ -46,11 +46,7 @@ public class Model {
 
     public int numerator = 0;
     public double denominator = 0;
-    public int ticksPerMetronomClixk = 0;
-    public int PPQ = 0;
-    public double BPM = 0;
-    public double tempo = 0;
-    public Double minimalNoteMsLength = 1223412314234234.0;
+    public int ticksPerMetronomClick = 0;
 
     public static TrackMap trackListOriginal;
 

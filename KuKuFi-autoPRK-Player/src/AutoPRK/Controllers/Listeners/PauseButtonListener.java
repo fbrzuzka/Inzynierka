@@ -6,7 +6,7 @@
 package AutoPRK.Controllers.Listeners;
 
 import AutoPRK.Controllers.WindowController;
-import AutoPRK.MessageController.Message.SimpleMessage;
+import AutoPRK.Models.Message.SimpleMessage;
 import AutoPRK.Models.Model;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
