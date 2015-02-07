@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.Models.Containers;
+package KuKuFi.Models.Containers;
 
-import AutoPRK.Controllers.PRKLogger;
-import AutoPRK.Controllers.WindowController;
-import AutoPRK.Models.DrumPart;
+import KuKuFi.Controllers.PRKLogger;
+import KuKuFi.Controllers.WindowController;
+import KuKuFi.Models.DrumPart;
 import java.util.ArrayList;
 
 /**

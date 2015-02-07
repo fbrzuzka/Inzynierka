@@ -1,8 +1,8 @@
-package AutoPRK.Controllers.Factory;
+package KuKuFi.Controllers.Factory;
 
-import AutoPRK.Models.DrumPart;
-import AutoPRK.Models.Containers.DrumPartList;
-import AutoPRK.Models.DrumPartListSingleton;
+import KuKuFi.Models.DrumPart;
+import KuKuFi.Models.Containers.DrumPartList;
+import KuKuFi.Models.DrumPartListSingleton;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -17,9 +17,9 @@ import javax.sound.midi.Sequence;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Track;
 
-import AutoPRK.Models.Containers.ProtocolListHashMap;
-import AutoPRK.Models.Model;
-import AutoPRK.Models.Containers.SingleDrumElementTimelineArray;
+import KuKuFi.Models.Containers.ProtocolListHashMap;
+import KuKuFi.Models.Model;
+import KuKuFi.Models.Containers.SingleDrumElementTimelineArray;
 import com.sun.org.apache.xalan.internal.lib.ExsltMath;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

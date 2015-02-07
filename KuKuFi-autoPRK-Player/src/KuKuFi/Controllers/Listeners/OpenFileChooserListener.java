@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.Controllers.Listeners;
+package KuKuFi.Controllers.Listeners;
 
-import AutoPRK.Controllers.Factory.ModelCreator;
-import AutoPRK.Controllers.WindowController;
-import AutoPRK.Models.Model;
-import AutoPRK.views.MainWindow;
+import KuKuFi.Controllers.Factory.ModelCreator;
+import KuKuFi.Controllers.WindowController;
+import KuKuFi.Models.Model;
+import KuKuFi.views.MainWindow;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,11 +1,11 @@
-package AutoPRK.Models;
+package KuKuFi.Models;
 
-import AutoPRK.Models.Containers.TrackMap;
-import AutoPRK.Models.Containers.ProtocolListHashMap;
-import AutoPRK.Models.Containers.DrumPartList;
-import AutoPRK.Controllers.MessageController.SerialPortTransmiter;
-import AutoPRK.MidiPlayer.*;
-import AutoPRK.Models.Containers.ConnectConfiguration;
+import KuKuFi.Models.Containers.TrackMap;
+import KuKuFi.Models.Containers.ProtocolListHashMap;
+import KuKuFi.Models.Containers.DrumPartList;
+import KuKuFi.Controllers.MessageController.SerialPortTransmiter;
+import KuKuFi.MidiPlayer.*;
+import KuKuFi.Models.Containers.ConnectConfiguration;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

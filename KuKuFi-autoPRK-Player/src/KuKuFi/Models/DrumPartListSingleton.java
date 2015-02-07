@@ -1,4 +1,4 @@
-package AutoPRK.Models;
+package KuKuFi.Models;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

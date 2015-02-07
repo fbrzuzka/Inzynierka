@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.views.Components;
+package KuKuFi.views.Components;
 
-import AutoPRK.Controllers.PRKLogger;
-import AutoPRK.Models.Containers.ConfPair;
-import AutoPRK.Models.DrumPart;
-import AutoPRK.Models.Model;
-import static AutoPRK.views.MainWindow.window;
+import KuKuFi.Controllers.PRKLogger;
+import KuKuFi.Models.Containers.ConfPair;
+import KuKuFi.Models.DrumPart;
+import KuKuFi.Models.Model;
+import static KuKuFi.views.MainWindow.window;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;

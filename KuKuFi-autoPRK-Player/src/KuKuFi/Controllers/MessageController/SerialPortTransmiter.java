@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.Controllers.MessageController;
+package KuKuFi.Controllers.MessageController;
 
-import AutoPRK.Controllers.WindowController;
-import AutoPRK.Models.Message.AbstractMessage;
-import AutoPRK.views.MainWindow;
+import KuKuFi.Controllers.WindowController;
+import KuKuFi.Models.Message.AbstractMessage;
+import KuKuFi.views.MainWindow;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;

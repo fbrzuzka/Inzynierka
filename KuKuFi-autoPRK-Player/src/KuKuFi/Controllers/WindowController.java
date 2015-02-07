@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.Controllers;
+package KuKuFi.Controllers;
 
-import AutoPRK.Controllers.Listeners.CheckBoxTracksToPlayListener;
-import AutoPRK.Controllers.Listeners.GenerateListener;
-import AutoPRK.Controllers.Listeners.OpenFileChooserListener;
-import AutoPRK.Controllers.Listeners.PauseButtonListener;
-import AutoPRK.Controllers.Listeners.PlayButtonListener;
-import AutoPRK.Controllers.Listeners.StopButtonListener;
-import AutoPRK.Controllers.Listeners.MusicSliderListener;
-import AutoPRK.Controllers.Listeners.LoadConfListener;
-import AutoPRK.Controllers.Listeners.ResetConfListener;
-import AutoPRK.Controllers.Listeners.SaveConfListener;
-import AutoPRK.MidiPlayer.SequencePlayer;
-import AutoPRK.Models.Containers.ConnectConfiguration;
-import AutoPRK.Models.DrumPart;
-import AutoPRK.Models.Containers.DrumPartList;
-import AutoPRK.Models.Model;
-import AutoPRK.Models.Containers.TrackMap;
-import AutoPRK.views.MainWindow;
+import KuKuFi.Controllers.Listeners.CheckBoxTracksToPlayListener;
+import KuKuFi.Controllers.Listeners.GenerateListener;
+import KuKuFi.Controllers.Listeners.OpenFileChooserListener;
+import KuKuFi.Controllers.Listeners.PauseButtonListener;
+import KuKuFi.Controllers.Listeners.PlayButtonListener;
+import KuKuFi.Controllers.Listeners.StopButtonListener;
+import KuKuFi.Controllers.Listeners.MusicSliderListener;
+import KuKuFi.Controllers.Listeners.LoadConfListener;
+import KuKuFi.Controllers.Listeners.ResetConfListener;
+import KuKuFi.Controllers.Listeners.SaveConfListener;
+import KuKuFi.MidiPlayer.SequencePlayer;
+import KuKuFi.Models.Containers.ConnectConfiguration;
+import KuKuFi.Models.DrumPart;
+import KuKuFi.Models.Containers.DrumPartList;
+import KuKuFi.Models.Model;
+import KuKuFi.Models.Containers.TrackMap;
+import KuKuFi.views.MainWindow;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridLayout;

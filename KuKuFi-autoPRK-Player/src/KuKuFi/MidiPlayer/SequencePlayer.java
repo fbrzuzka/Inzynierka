@@ -1,7 +1,7 @@
-package AutoPRK.MidiPlayer;
+package KuKuFi.MidiPlayer;
 
-import AutoPRK.Controllers.PRKLogger;
-import AutoPRK.Models.Model;
+import KuKuFi.Controllers.PRKLogger;
+import KuKuFi.Models.Model;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;

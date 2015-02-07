@@ -8,16 +8,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.views;
+package KuKuFi.views;
 
-import AutoPRK.Controllers.WindowController;
-import AutoPRK.Models.MapOfPacketTypes;
-import AutoPRK.Models.Model;
-import AutoPRK.Models.MusicSlider;
-import AutoPRK.views.Components.ConnectPanel;
-import AutoPRK.views.Components.DrumTrackPanelBase;
-import AutoPRK.views.Components.LeftElementPanel;
-import AutoPRK.views.Components.RightDrumPanel;
+import KuKuFi.Controllers.WindowController;
+import KuKuFi.Models.MapOfMessageTypes;
+import KuKuFi.Models.Model;
+import KuKuFi.Models.MusicSlider;
+import KuKuFi.views.Components.ConnectPanel;
+import KuKuFi.views.Components.DrumTrackPanelBase;
+import KuKuFi.views.Components.LeftElementPanel;
+import KuKuFi.views.Components.RightDrumPanel;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -70,7 +70,7 @@ public class MainWindow extends javax.swing.JFrame {
         fooLabel = new javax.swing.JLabel();
         step3Panel = new javax.swing.JPanel();
         connectPanel = new ConnectPanel();
-        drumTrackPanel = new AutoPRK.views.Components.LeftElementPanel();
+        drumTrackPanel = new KuKuFi.views.Components.LeftElementPanel();
         ;
         ((ConnectPanel)connectPanel).setDrumTrackPanel((DrumTrackPanelBase)drumTrackPanel);
         jSeparator1 = new javax.swing.JSeparator();

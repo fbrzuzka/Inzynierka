@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.Controllers.MessageController;
+package KuKuFi.Controllers.MessageController;
 
-import AutoPRK.Models.MapOfControlMessageTypes;
-import AutoPRK.Models.MapOfPacketTypes;
-import AutoPRK.Models.Message.DataMessage;
-import AutoPRK.Models.DrumPart;
-import AutoPRK.Models.Model;
+import KuKuFi.Models.MapOfControlMessageTypes;
+import KuKuFi.Models.MapOfMessageTypes;
+import KuKuFi.Models.Message.DataMessage;
+import KuKuFi.Models.DrumPart;
+import KuKuFi.Models.Model;
 
 /**
  *
@@ -27,7 +27,7 @@ public class MessageParser {
 
         byte type = bytePacket[0];
 
-        System.out.println("typ pakietu: " + type + " : " + MapOfPacketTypes.getType(type));
+        System.out.println("typ pakietu: " + type + " : " + MapOfMessageTypes.getType(type));
 
         switch (type) {
             case 101: {

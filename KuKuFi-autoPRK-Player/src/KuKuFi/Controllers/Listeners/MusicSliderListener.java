@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.Controllers.Listeners;
+package KuKuFi.Controllers.Listeners;
 
-import AutoPRK.Models.Model;
+import KuKuFi.Models.Model;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JSlider;

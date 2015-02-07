@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.Controllers.Listeners;
+package KuKuFi.Controllers.Listeners;
 
-import AutoPRK.Models.Model;
-import AutoPRK.views.MainWindow;
+import KuKuFi.Models.Model;
+import KuKuFi.views.MainWindow;
 import com.google.gson.Gson;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
