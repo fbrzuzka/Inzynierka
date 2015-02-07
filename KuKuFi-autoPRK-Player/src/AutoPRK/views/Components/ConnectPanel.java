@@ -9,7 +9,7 @@ import AutoPRK.Controllers.PRKLogger;
 import AutoPRK.Models.Containers.ConfPair;
 import AutoPRK.Models.DrumPart;
 import AutoPRK.Models.Model;
-import static AutoPRK.views.mainWindow.window;
+import static AutoPRK.views.MainWindow.window;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Component;

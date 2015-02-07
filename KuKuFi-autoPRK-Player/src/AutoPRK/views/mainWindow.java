@@ -11,7 +11,7 @@
 package AutoPRK.views;
 
 import AutoPRK.Controllers.WindowController;
-import AutoPRK.Controllers.MessageController.MapOfPacketTypes;
+import AutoPRK.Models.MapOfPacketTypes;
 import AutoPRK.Models.Model;
 import AutoPRK.Models.MusicSlider;
 import AutoPRK.views.Components.ConnectPanel;
@@ -28,14 +28,14 @@ import javax.swing.plaf.metal.MetalSliderUI;
  *
  * @author fbrzuzka
  */
-public class mainWindow extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame {
 
-    public static mainWindow window;
+    public static MainWindow window;
 
     /**
      * Creates new form mainWindow
      */
-    public mainWindow() {
+    public MainWindow() {
         initComponents();
     }
 
@@ -86,6 +86,7 @@ public class mainWindow extends javax.swing.JFrame {
         infoArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("KuKuFi - simple autoPRK controller!");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -407,14 +408,12 @@ public class mainWindow extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(allStepPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(allStepPanelLayout.createSequentialGroup()
-                        .addComponent(step4Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(allStepPanelLayout.createSequentialGroup()
                         .addComponent(step1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(step2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(step3Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(step2Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(step4Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(step3Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(91, 91, 91))
         );
 
@@ -481,8 +480,9 @@ public class mainWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(mainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         //</editor-fold>
@@ -491,7 +491,7 @@ public class mainWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                window = new mainWindow();
+                window = new MainWindow();
                 window.setVisible(true);
                 WindowController.getInstance();
             }

@@ -8,11 +8,12 @@ package AutoPRK.Controllers.Listeners;
 import AutoPRK.Controllers.Factory.ModelCreator;
 import AutoPRK.Controllers.WindowController;
 import AutoPRK.Models.Model;
-import AutoPRK.views.mainWindow;
+import AutoPRK.views.MainWindow;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -21,11 +22,11 @@ import javax.swing.JFileChooser;
 public class OpenFileChooserListener implements ActionListener {
 
     private final Model model;
-    private final mainWindow window;
+    private final MainWindow window;
 
     public OpenFileChooserListener() {
 
-        this.window = mainWindow.window;
+        this.window = MainWindow.window;
         this.model = Model.instanceOf();
     }
 
@@ -34,8 +35,10 @@ public class OpenFileChooserListener implements ActionListener {
 
         JFileChooser c = new JFileChooser();
         c.setPreferredSize(new Dimension(800, 600));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("midi files only :)", "mid", "midi");
+        c.setFileFilter(filter);
         //s Demonstrate "Open" dialog:
-        int rVal = c.showOpenDialog(mainWindow.window);
+        int rVal = c.showOpenDialog(MainWindow.window);
         if (rVal == JFileChooser.APPROVE_OPTION) {
 
             window.getSelectTrackComboBox().removeAllItems();

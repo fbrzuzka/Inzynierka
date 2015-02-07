@@ -8,7 +8,7 @@ package AutoPRK.Controllers.Listeners;
 import AutoPRK.Controllers.WindowController;
 import AutoPRK.Models.Containers.ConnectConfiguration;
 import AutoPRK.Models.Model;
-import AutoPRK.views.mainWindow;
+import AutoPRK.views.MainWindow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,7 +30,7 @@ public class ResetConfListener implements ActionListener{
         
         WindowController.getInstance().setEnablingOfStep4(false);
         
-        mainWindow.window.getStep3Panel().repaint();
+        MainWindow.window.getStep3Panel().repaint();
         
     }
     

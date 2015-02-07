@@ -9,7 +9,7 @@ import AutoPRK.Models.Containers.ConfPair;
 import AutoPRK.Models.Containers.ConnectConfiguration;
 import AutoPRK.Models.Model;
 import AutoPRK.views.Components.DrumTrackPanelBase;
-import AutoPRK.views.mainWindow;
+import AutoPRK.views.MainWindow;
 import com.google.gson.Gson;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,10 +32,10 @@ public class LoadConfListener implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         Gson gson = new Gson();
         String json = "";
-        String nameOfFile = mainWindow.window.getMidiNameTextField().getText() + ".json";
+        String nameOfFile = MainWindow.window.getMidiNameTextField().getText() + ".json";
 
-        DrumTrackPanelBase drumKit = mainWindow.window.getConnectPanel().getDrumKitElementPanel();
-        DrumTrackPanelBase drumTrack = mainWindow.window.getConnectPanel().getDrumTrackPanel();
+        DrumTrackPanelBase drumKit = MainWindow.window.getConnectPanel().getDrumKitElementPanel();
+        DrumTrackPanelBase drumTrack = MainWindow.window.getConnectPanel().getDrumTrackPanel();
 
         BufferedReader reader = null;
         try {
@@ -59,8 +59,8 @@ public class LoadConfListener implements ActionListener {
         }
 
         System.out.println(json);
-        mainWindow.window.getStep3Panel().repaint();
-        mainWindow.window.pack();
+        MainWindow.window.getStep3Panel().repaint();
+        MainWindow.window.pack();
 
     }
 }

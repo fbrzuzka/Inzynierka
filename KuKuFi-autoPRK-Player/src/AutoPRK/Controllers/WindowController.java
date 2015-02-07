@@ -21,7 +21,7 @@ import AutoPRK.Models.DrumPart;
 import AutoPRK.Models.Containers.DrumPartList;
 import AutoPRK.Models.Model;
 import AutoPRK.Models.Containers.TrackMap;
-import AutoPRK.views.mainWindow;
+import AutoPRK.views.MainWindow;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -39,7 +39,7 @@ import javax.swing.JRadioButton;
 public class WindowController {
 
     private static WindowController windowController = null;
-    private static mainWindow window = null;
+    private static MainWindow window = null;
     private Model model;
     private Thread thread;
 
@@ -52,7 +52,7 @@ public class WindowController {
 
     private WindowController() {
         this.model = Model.instanceOf();
-        WindowController.window = mainWindow.window;
+        WindowController.window = MainWindow.window;
         configureListeners();
 
         thread = new Thread(new Runnable() {

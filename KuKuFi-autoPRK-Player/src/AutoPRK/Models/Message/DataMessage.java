@@ -9,7 +9,7 @@ package AutoPRK.Models.Message;
  *
  * @author fbrzuzka
  */
-public class DataMessage extends Message{
+public class DataMessage extends AbstractMessage{
 
     private byte nrPalki;
     int numberOfNote;

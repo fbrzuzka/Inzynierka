@@ -6,7 +6,7 @@
 package AutoPRK.Controllers.Listeners;
 
 import AutoPRK.Models.Model;
-import AutoPRK.views.mainWindow;
+import AutoPRK.views.MainWindow;
 import com.google.gson.Gson;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +25,7 @@ public class SaveConfListener implements ActionListener {
         Gson gson = new Gson();
         String json = gson.toJson(Model.connectConfig);
         System.out.println(json);
-        String nameOfFile = mainWindow.window.getMidiNameTextField().getText() + ".json";
+        String nameOfFile = MainWindow.window.getMidiNameTextField().getText() + ".json";
 
         BufferedWriter writer = null;
         try {

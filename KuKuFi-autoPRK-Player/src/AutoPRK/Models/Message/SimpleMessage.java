@@ -9,31 +9,31 @@ package AutoPRK.Models.Message;
  *
  * @author fbrzuzka
  */
-public class SimpleMessage extends Message {
+public class SimpleMessage extends AbstractMessage {
 
-    private byte foo;
+    private byte content;
 
     public SimpleMessage(byte type, byte foo) {
 
         this.type = type;
-        this.foo = foo;
+        this.content = foo;
     }
 
     public byte getFoo() {
-        return foo;
+        return content;
     }
 
     public void setFoo(byte foo) {
-        this.foo = foo;
+        this.content = foo;
     }
 
     @Override
     public String toString() {
-        return Byte.toString(foo);
+        return Byte.toString(content);
     }
 
     public byte toByte() {
-        return foo;
+        return content;
     }
 
     
@@ -43,7 +43,7 @@ public class SimpleMessage extends Message {
         byte[] rc = new byte[58];
         int i = 0;
         rc[i++] = type;
-        rc[i++] = foo;
+        rc[i++] = content;
 
         
         System.out.println(rc[0] + " " + rc[1] + " " + rc[2] + " " + rc[3] + " " + rc[4]);

@@ -9,7 +9,7 @@ import AutoPRK.Controllers.Factory.ModelCreator;
 import AutoPRK.Controllers.PRKLogger;
 import AutoPRK.Controllers.WindowController;
 import AutoPRK.Models.Model;
-import AutoPRK.views.mainWindow;
+import AutoPRK.views.MainWindow;
 import AutoPRK.MidiPlayer.SequencePlayer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,15 +44,15 @@ public class GenerateListener implements ActionListener {
         WindowController.getInstance().addDrumKitElementRadioButtons(Model.drumKitPartElements);
         
         
-        mainWindow.window.getStep3Panel().repaint();
-        mainWindow.window.pack();
+        MainWindow.window.getStep3Panel().repaint();
+        MainWindow.window.pack();
 
 
     }
 
     private Track getSelectedTrackFromComboBox() {
 
-        JComboBox cb = mainWindow.window.getSelectTrackComboBox();
+        JComboBox cb = MainWindow.window.getSelectTrackComboBox();
         String trackName = (String) cb.getSelectedItem();
         PRKLogger.instance().logToInfoArea("wybrałeś ścieżkę: " + trackName);
         return Model.trackListOriginal.get(trackName);

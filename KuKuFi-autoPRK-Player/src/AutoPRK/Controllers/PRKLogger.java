@@ -5,7 +5,7 @@
  */
 package AutoPRK.Controllers;
 
-import AutoPRK.views.mainWindow;
+import AutoPRK.views.MainWindow;
 
 /**
  *
@@ -13,9 +13,9 @@ import AutoPRK.views.mainWindow;
  */
 public class PRKLogger {
     
-    private mainWindow window;
+    private MainWindow window;
     private PRKLogger() {
-        this.window = mainWindow.window;
+        this.window = MainWindow.window;
     }
     
     public static PRKLogger instance() {

@@ -6,8 +6,8 @@
 package AutoPRK.Controllers.MessageController;
 
 import AutoPRK.Controllers.WindowController;
-import AutoPRK.Models.Message.Message;
-import AutoPRK.views.mainWindow;
+import AutoPRK.Models.Message.AbstractMessage;
+import AutoPRK.views.MainWindow;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
@@ -104,11 +104,11 @@ public class SerialPortTransmiter implements SerialPortEventListener {
             }
 
             if (portId == null || serialPort == null) {
-                JOptionPane.showMessageDialog(mainWindow.window,
+                JOptionPane.showMessageDialog(MainWindow.window,
                         "autoPRK is not connected to USB port or port is in use.\n Please unplug autoPRK from USB and then plug it again.",
                         "autoPRK warning",
                         JOptionPane.WARNING_MESSAGE);
-                mainWindow.window.repaint();
+                MainWindow.window.repaint();
                 System.out.println("Oops... Could not connect to Arduino");
                 return false;
             }
@@ -137,19 +137,12 @@ public class SerialPortTransmiter implements SerialPortEventListener {
         return false;
     }
 
-    public void sendData(Message message) {
+    public void sendMessage(AbstractMessage message) {
         try {
-
-            System.out.println("Sending data: '" + message.toString() + "'");
-            // open the streams and send the "y" character
             output = serialPort.getOutputStream();
             output.write(message.toSend());
-            //  dataOut = new DataOutputStream(output);
-            // dataOut.writeBytes(packet.toString().getBytes());
         } catch (Exception e) {
-            System.err.println("Hey men, you dont connect Arduino!");
-            // WindowController.getInstance().showWarningDialog();
-            // e.printStackTrace();
+            System.err.println("Dear user, you didn't connect Arduino");
         }
     }
 
@@ -179,7 +172,7 @@ public class SerialPortTransmiter implements SerialPortEventListener {
                 }
                 System.out.println("");
                 String foo = new String(readBuffer);
-                PacketParser.parseString(foo);
+                MessageParser.parseString(foo);
             }
         } catch (IOException e) {
         }
@@ -204,7 +197,7 @@ public class SerialPortTransmiter implements SerialPortEventListener {
 //                    }
 //                    System.out.println("");
 //                    String foo = new String(odebrane);
-//                    PacketParser.parseString(foo);
+//                    MessageParser.parseString(foo);
 //                    break;
 //
 //                default:

@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.MessageController.Message;
+package AutoPRK.Models.Message;
 
 /**
  *
  * @author fbrzuzka
  */
-public abstract class Message {
+public abstract class AbstractMessage {
     
     protected byte type;
     

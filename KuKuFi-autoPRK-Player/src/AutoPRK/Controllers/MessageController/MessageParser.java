@@ -3,23 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AutoPRK.MessageController;
+package AutoPRK.Controllers.MessageController;
 
-import AutoPRK.MessageController.Message.DataMessage;
-import AutoPRK.MessageController.Message.Message;
-import AutoPRK.Models.Containers.ConfPair;
+import AutoPRK.Models.MapOfControlMessageTypes;
+import AutoPRK.Models.MapOfPacketTypes;
+import AutoPRK.Models.Message.DataMessage;
 import AutoPRK.Models.DrumPart;
 import AutoPRK.Models.Model;
-import java.util.HashMap;
-import java.util.Set;
 
 /**
  *
  * @author fbrzuzka
  */
-public class PacketParser {
+public class MessageParser {
 
-    private PacketParser() {
+    private MessageParser() {
 
     }
 
@@ -27,8 +25,6 @@ public class PacketParser {
 
         byte bytePacket[] = str.getBytes();
 
-       // System.out.println("typ. " + bytePacket[0]);
-        //  System.out.println("2. " + bytePacket[1]);
         byte type = bytePacket[0];
 
         System.out.println("typ pakietu: " + type + " : " + MapOfPacketTypes.getType(type));
@@ -85,13 +81,12 @@ public class PacketParser {
                     temp[0] = bytePacket[5];
                     msTrackNoString += new String(temp);
                 }
-                
-                           
+                 
                 
                 int msTrackNoInt = Integer.parseInt(msTrackNoString);
 
                 int[] data = Model.protocolList.get(drumPart.getPartName()).get8IntsToArduino(msTrackNoInt);
-                Model.serialPortTransmiter.sendData(new DataMessage((byte) 103, nrPalki, data));
+                Model.serialPortTransmiter.sendMessage(new DataMessage((byte) 103, nrPalki, data));
               //  System.out.println("wysłałem i chyba sie udało :D");
                 break;
             }
@@ -103,7 +98,6 @@ public class PacketParser {
 
         }
 
-        //   return new Packet();
     }
 
 }

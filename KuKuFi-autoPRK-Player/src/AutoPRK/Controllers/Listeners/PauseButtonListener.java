@@ -25,7 +25,7 @@ public class PauseButtonListener implements ActionListener{
         WindowController.getInstance().setEnablingOfStep2(Boolean.TRUE);
         WindowController.getInstance().setEnablingOfStep3(Boolean.TRUE);
         
-        Model.serialPortTransmiter.sendData(new SimpleMessage((byte)101, (byte)112));
+        Model.serialPortTransmiter.sendMessage(new SimpleMessage((byte)101, (byte)112));
     }
     
 }

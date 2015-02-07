@@ -25,7 +25,7 @@ public class StopButtonListener implements ActionListener{
         WindowController.getInstance().setEnablingOfStep2(Boolean.TRUE);
         WindowController.getInstance().setEnablingOfStep3(Boolean.TRUE);
         
-        Model.serialPortTransmiter.sendData(new SimpleMessage((byte)101, (byte)113));
+        Model.serialPortTransmiter.sendMessage(new SimpleMessage((byte)101, (byte)113));
     }
     
 }

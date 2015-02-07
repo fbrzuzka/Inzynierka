@@ -25,7 +25,7 @@ public class PlayButtonListener implements ActionListener{
         WindowController.getInstance().setEnablingOfStep2(false);
         WindowController.getInstance().setEnablingOfStep3(false);
        
-        Model.serialPortTransmiter.sendData(new SimpleMessage((byte)101, (byte)111));
+        Model.serialPortTransmiter.sendMessage(new SimpleMessage((byte)101, (byte)111));
     }
     
 }
