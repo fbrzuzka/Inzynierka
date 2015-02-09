@@ -37,7 +37,7 @@ public class OpenFileChooserListener implements ActionListener {
         c.setPreferredSize(new Dimension(800, 600));
         FileNameExtensionFilter filter = new FileNameExtensionFilter("midi files only :)", "mid", "midi");
         c.setFileFilter(filter);
-        //s Demonstrate "Open" dialog:
+        
         int rVal = c.showOpenDialog(MainWindow.window);
         if (rVal == JFileChooser.APPROVE_OPTION) {
 

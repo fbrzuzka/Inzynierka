@@ -1,6 +1,5 @@
 package KuKuFi.Models.Containers;
 
-import KuKuFi.Models.DrumPart;
 import java.util.LinkedHashMap;
 
 /*
@@ -28,14 +27,5 @@ public class ProtocolListHashMap extends LinkedHashMap<String, SingleDrumElement
         }
         return rc;
     }
-//    public String toArduino(int limit) {
-//        String rc = "\n";
-//        int iter=0;
-//        for (DrumPart dr : this.keySet()) {
-//            rc +=  "unsigned char foo" + iter  + "[ODEBRANE] = " + this.get(dr).drToArduino(limit)+ "; \n";
-//            iter++;
-//        }
-//        return rc;
-//    }
 
 }

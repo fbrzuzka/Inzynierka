@@ -13,18 +13,18 @@ public class SimpleMessage extends AbstractMessage {
 
     private byte content;
 
-    public SimpleMessage(byte type, byte foo) {
+    public SimpleMessage(byte type, byte content) {
 
         this.type = type;
-        this.content = foo;
+        this.content = content;
     }
 
     public byte getFoo() {
         return content;
     }
 
-    public void setFoo(byte foo) {
-        this.content = foo;
+    public void setFoo(byte content) {
+        this.content = content;
     }
 
     @Override

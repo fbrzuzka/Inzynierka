@@ -12,7 +12,6 @@ package KuKuFi.Models.Message;
 public class DataMessage extends AbstractMessage{
 
     private byte nrPalki;
-    int numberOfNote;
     private int[] data;
     
     public DataMessage() {
@@ -22,7 +21,6 @@ public class DataMessage extends AbstractMessage{
     public DataMessage(byte type, byte nrPalki, int[] data) {
     
         this.type = type;
-        this.numberOfNote = numberOfNote;
         this.nrPalki = nrPalki;
         this.data = data;
     }
@@ -34,6 +32,7 @@ public class DataMessage extends AbstractMessage{
     }
     
     
+    @Override
     public byte[] toSend(){
         byte[] rc = new byte[58];
         int i=0;
@@ -44,7 +43,6 @@ public class DataMessage extends AbstractMessage{
         for (byte b : datatoString(data).getBytes()) {
             rc[i++] = b;
         }
-       //  System.out.println("toSend: " + new String(rc));       
         return rc;
     }
     

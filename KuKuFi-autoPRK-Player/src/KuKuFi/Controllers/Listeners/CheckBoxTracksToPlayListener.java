@@ -21,12 +21,11 @@ public class CheckBoxTracksToPlayListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         JCheckBox checkbox = (JCheckBox) ae.getSource();
-        // System.out.println("checkbox: " + checkbox.getText() + " selected: " + checkbox.isSelected());
-        int trackNumber = getTruckNumberFromCheckBox____xD(checkbox);
+        int trackNumber = getTruckNumberFromCheckBox(checkbox);
         Model.sequencePlayer.muteTrack(trackNumber, !checkbox.isSelected());
     }
 
-    private int getTruckNumberFromCheckBox____xD(JCheckBox checkbox) {
+    private int getTruckNumberFromCheckBox(JCheckBox checkbox) {
         int trackNumber = 0;
         String nameOfTrack = checkbox.getText();
         

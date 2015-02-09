@@ -33,18 +33,14 @@ public class ModelCreator {
 
     public ModelCreator() {
         Model.protocolList = new ProtocolListHashMap();
-       
-      //  setAllTracks(model.sequenceOriginal);
         setResolutionInMs(Model.sequenceOriginal);
         echoInfoAboutModel();
-        //parseTrackToArrayList(model.trackSelectedToGenerate);
         Model.protocolList = newParseToHashMap(model.trackSelectedToGenerate);
 
     }
     
     public DrumPartList addElementsToDrumTrack(){
         DrumPartList dpl = new DrumPartList();
-        
         return dpl;
     }
     private ProtocolListHashMap newParseToHashMap(Track track){
@@ -58,10 +54,7 @@ public class ModelCreator {
 
         for (int i = 0; i < track.size(); i++) {
             MidiEvent event = track.get(i);
-
-           // double tickInMs = (event.getTick() * model.milis)/1000;
-            
-            int tempoTickInMs = (int)((event.getTick() * model.milis*1000)/1000);
+            int tempoTickInMs = (int)((event.getTick() * model.tickToMilisRatio*1000)/1000);
             MidiMessage message = event.getMessage();
             if (message instanceof ShortMessage) {
                 ShortMessage sm = (ShortMessage) message;
@@ -86,9 +79,6 @@ public class ModelCreator {
     
         
     }
-    
-    
-    
     
     
    public static Sequence getSequenceFromMidiFile(File file) {
@@ -130,12 +120,10 @@ public class ModelCreator {
 
 
     private void setResolutionInMs(Sequence seq) {
-        int longestTrack = -10;
-        for (Track tr : seq.getTracks()) {
-        }
-        
-        model.milis = model.sequenceOriginal.getMicrosecondLength() / (model.sequenceOriginal.getTickLength() * 1000.0);
+        model.tickToMilisRatio = model.sequenceOriginal.getMicrosecondLength() / (model.sequenceOriginal.getTickLength() * 1000.0);
     }
+    
+    
 
     private DrumPartList findElementOfDrumKit(Track track) {
 
@@ -203,7 +191,7 @@ public class ModelCreator {
         System.out.println("sequence.getMicrosecondLength()  " + Model.sequenceOriginal.getMicrosecondLength());
         System.out.println("length in second: " + (double) Model.sequenceOriginal.getMicrosecondLength() / 1000000);
 
-        System.out.println("milis: " + model.milis);
+        System.out.println("milis: " + model.tickToMilisRatio);
         System.out.println("");
         System.out.println("");
 

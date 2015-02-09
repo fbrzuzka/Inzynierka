@@ -23,22 +23,19 @@ import javax.sound.midi.Track;
  */
 public class Model {
 
-    private static Model instance = null;
-
     public static final int NOTE_ON = 0x90;
     public static final int NOTE_OFF = 0x80;
-    public static final String[] NOTE_NAMES = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
-    public static int limitOfTrackLength = 50;
-    public static SerialPortTransmiter serialPortTransmiter = null;
-
+    public static final String[] NOTE_NAMES = 
+            {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
+    public static SerialPortTransmiter serialPortTransmiter;
     public File midiFile;
-    public double milis;
+    public double tickToMilisRatio;
     public static Sequence sequenceToPlayFromSpeakers;
     public static Sequence sequenceOriginal;
     public static Track trackSelectedToGenerate;
     public static DrumPartList drumTrackElements;
     public static List<String> drumKitPartElements;
-    public static ProtocolListHashMap protocolList = null;
+    public static ProtocolListHashMap protocolList;
     public static ConnectConfiguration connectConfig;
 
     public static TrackMap trackListToPlayFromSpeakers;
@@ -68,6 +65,9 @@ public class Model {
         drumKitPartElements.add("9");   
         drumKitPartElements.add("10"); 
     }
+    
+    
+    private static Model instance = null;
 
     public static Model instanceOf() {
         if (instance == null) {

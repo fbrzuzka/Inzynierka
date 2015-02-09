@@ -1,6 +1,5 @@
 package KuKuFi.MidiPlayer;
 
-import KuKuFi.Controllers.PRKLogger;
 import KuKuFi.Models.Model;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -45,12 +44,10 @@ public class SequencePlayer {
 
     }
 
- 
     
     public void callSlider() {
 
-        int position = (int) (sequencer1.getTickPosition() * Model.instanceOf().milis / 1000);
-       // System.out.println(position);
+        int position = (int) (sequencer1.getTickPosition() * Model.instanceOf().tickToMilisRatio / 1000);
         listner.handleEvent(position);
     }
 
@@ -79,7 +76,7 @@ public class SequencePlayer {
                 String lcName
                         = StringUtils.defaultString(mdi.getName())
                         .toLowerCase(Locale.ENGLISH);
-                //  if (lcName.contains(useExternalSynth? "midi": "java")) {
+                
                 if (lcName.contains("midi")) {
                     return dev;
                 }

@@ -87,7 +87,7 @@ public class MessageParser {
 
                 int[] data = Model.protocolList.get(drumPart.getPartName()).get8IntsToArduino(msTrackNoInt);
                 Model.serialPortTransmiter.sendMessage(new DataMessage((byte) 103, nrPalki, data));
-              //  System.out.println("wysłałem i chyba sie udało :D");
+                
                 break;
             }
             default: {

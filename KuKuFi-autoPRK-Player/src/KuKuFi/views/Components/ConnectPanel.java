@@ -47,10 +47,8 @@ public class ConnectPanel extends JPanel implements ActionListener {
             JRadioButton radio = (JRadioButton) ae.getSource();
             if (radio.getParent() == drumTrackPanel) {
                 radioTrack = radio;
-                PRKLogger.instance().logToInfoArea("jestem na track panelu");
             } else if (radio.getParent() == drumKitElementPanel) {
                 radioElement = radio;
-                PRKLogger.instance().logToInfoArea("jestem na element panelu");
             }
 
             ConfPair pair = null;
@@ -60,8 +58,6 @@ public class ConnectPanel extends JPanel implements ActionListener {
             boolean doIt = false;
 
             if ((radioElement != null) && (drumTrackPanel.getGroup().getSelection() != null)) {
-                PRKLogger.instance().logToInfoArea("połaczyłem 1");
-
                 a = radioElement.getText();
 
                 Component[] components = drumTrackPanel.getComponents();
@@ -78,8 +74,6 @@ public class ConnectPanel extends JPanel implements ActionListener {
                     }
                 }
             } else if ((radioTrack != null) && (drumKitElementPanel.getGroup().getSelection() != null)) {
-                PRKLogger.instance().logToInfoArea("połaczyłem 2");
-
                 b = radioTrack.getText();
 
                 Component[] components = drumKitElementPanel.getComponents();

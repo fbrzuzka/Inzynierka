@@ -5,25 +5,22 @@
  */
 package KuKuFi.Controllers.MessageController;
 
-import KuKuFi.Controllers.WindowController;
 import KuKuFi.Models.Message.AbstractMessage;
 import KuKuFi.views.MainWindow;
 import gnu.io.CommPortIdentifier;
+import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
+import gnu.io.UnsupportedCommOperationException;
+import java.awt.HeadlessException;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
-import java.io.FileOutputStream;
-import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.PipedOutputStream;
 import java.util.Enumeration;
+import java.util.TooManyListenersException;
 import javax.swing.JOptionPane;
 
 /**
@@ -72,7 +69,7 @@ public class SerialPortTransmiter implements SerialPortEventListener {
     };
 
     public SerialPortTransmiter() {
-        boolean initialize = initialize();
+        initialize();
     }
 
     public boolean initialize() {
@@ -80,21 +77,13 @@ public class SerialPortTransmiter implements SerialPortEventListener {
             CommPortIdentifier portId = null;
             Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
 
-            // Enumerate system ports and try connecting to Arduino over each
-            //
             System.out.println("Trying:");
             while (portId == null && portEnum.hasMoreElements()) {
-                // Iterate through your host computer's serial port IDs
-                //
+                
                 CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
                 System.out.println("   port" + currPortId.getName());
                 for (String portName : PORT_NAMES) {
-                    if (currPortId.getName().equals(portName)
-                            || currPortId.getName().startsWith(portName)) {
-
-                        // Try to connect to the Arduino on this port
-                        //
-                        // Open serial port
+                    if (currPortId.getName().equals(portName) || currPortId.getName().startsWith(portName)) {
                         serialPort = (SerialPort) currPortId.open(appName, TIME_OUT);
                         portId = currPortId;
                         System.out.println("Connected on port" + currPortId.getName());
@@ -119,7 +108,7 @@ public class SerialPortTransmiter implements SerialPortEventListener {
                     SerialPort.STOPBITS_1,
                     SerialPort.PARITY_NONE);
 
-            // add event listeners
+            
             serialPort.addEventListener(this);
             serialPort.notifyOnDataAvailable(true);
             inStream = serialPort.getInputStream();
@@ -131,7 +120,7 @@ public class SerialPortTransmiter implements SerialPortEventListener {
             }
 
             return true;
-        } catch (Exception e) {
+        } catch (PortInUseException | HeadlessException | UnsupportedCommOperationException | TooManyListenersException | IOException e) {
             e.printStackTrace();
         }
         return false;
@@ -178,38 +167,7 @@ public class SerialPortTransmiter implements SerialPortEventListener {
         }
     }
 
-//    @Override
-//    public synchronized void serialEvent(SerialPortEvent oEvent) {
-//        try {
-//            switch (oEvent.getEventType()) {
-//                case SerialPortEvent.DATA_AVAILABLE:
-//                    if (input == null) {
-//                        input = new BufferedReader(
-//                                new InputStreamReader(
-//                                        serialPort.getInputStream()));
-//                    }
-//                    char odebrane[] = new char[10];
-//                    input.read(odebrane);
-//
-//                    System.out.println("odebrane od biedrzego: ");
-//                    for (char p : odebrane) {
-//                        System.out.print((byte) p + " ");
-//                    }
-//                    System.out.println("");
-//                    String foo = new String(odebrane);
-//                    MessageParser.parseString(foo);
-//                    break;
-//
-//                default:
-//                    break;
-//            }
-//        } catch (Exception e) {
-//            System.err.println(e.toString());
-//        }
-//    }
-    //
-    // This should be called when you stop using the port
-    //
+    
     public synchronized void close() {
         if (serialPort != null) {
             serialPort.removeEventListener();

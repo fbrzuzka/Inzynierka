@@ -124,9 +124,7 @@ public class WindowController {
         window.getPlayButton().addActionListener(new PlayButtonListener());
         window.getPauseButton().addActionListener(new PauseButtonListener());
         window.getStopButton().addActionListener(new StopButtonListener());
-        MusicSliderListener msl = new MusicSliderListener();
-        window.getMusicSlider().addChangeListener(msl);
-        window.getMusicSlider().addMouseListener(msl);
+        window.getMusicSlider().addMouseListener(new MusicSliderListener());
         window.getLoadConfButton().addActionListener(new LoadConfListener());
         window.getSaveConfButton().addActionListener(new SaveConfListener());
         window.getResetConfiguration().addActionListener(new ResetConfListener());
@@ -158,7 +156,6 @@ public class WindowController {
             checkbox.setEnabled(false);
             addListenerToCheckBox(checkbox);
             window.getCheckBoxPanel().add(checkbox);
-            //   window.getSelectTrackComboBox().addItem(name);  //mie wiem co z tym ale chyba do wywalenia/
         }
         window.getCheckBoxPanel().repaint();
     }
@@ -178,7 +175,7 @@ public class WindowController {
     }
 
     public void removeConnectRadioButtons() {
-        window.getConnectPanel().clear();  //wyłaczyłem bo za bardzo się usuwało.
+        window.getConnectPanel().clear(); 
         Model.connectConfig = new ConnectConfiguration();
         //   window.getConnectPanel().repaint();
     }
@@ -217,7 +214,7 @@ public class WindowController {
         PRKLogger.instance().logToInfoArea("number of ticks:  " + Model.sequenceOriginal.getTickLength());
         PRKLogger.instance().logToInfoArea("lenght in ms:  " + Model.sequenceOriginal.getMicrosecondLength());
         PRKLogger.instance().logToInfoArea("length in second: " + (double) Model.sequenceOriginal.getMicrosecondLength() / 1000000);
-        PRKLogger.instance().logToInfoArea("milis: " + model.milis);
+        PRKLogger.instance().logToInfoArea("milis: " + model.tickToMilisRatio);
         PRKLogger.instance().logToInfoArea("");
 
     }

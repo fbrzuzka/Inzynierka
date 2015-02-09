@@ -24,7 +24,7 @@ public class ConfPair{
     
     @Override
     public String toString(){
-        return "wybrałeś parę: " + drumKitElement + ", " + drumPart.getPartName();
+        return "You choose a pair: " + drumKitElement + " -- " + drumPart.getPartName();
         
     }
 
