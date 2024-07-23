@@ -7,7 +7,6 @@ package KuKuFi_Pi.Models.Containers;
 
 import KuKuFi_Pi.Controllers.Raspberry.Pin_Pi;
 import KuKuFi_Pi.Models.DrumPart;
-import com.pi4j.io.gpio.GpioPinDigitalOutput;
 
 
 /**

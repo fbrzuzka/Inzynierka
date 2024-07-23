@@ -23,6 +23,8 @@ import KuKuFi_Pi.Models.JRadioButtonWithFile;
 import KuKuFi_Pi.Models.Model;
 import KuKuFi_Pi.views.Components.NamedJRadioButton;
 import KuKuFi_Pi.views.MainWindow_Pi;
+import org.apache.commons.lang3.SystemUtils;
+
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -40,8 +42,8 @@ import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+
 /**
- *
  * @author fbrzuzka
  */
 public class WindowController_Pi {
@@ -62,7 +64,7 @@ public class WindowController_Pi {
     }
 
     private WindowController_Pi() {
-        this.model = Model.instanceOf();
+        this.model = Model.getInstance();
         WindowController_Pi.window_Pi = MainWindow_Pi.window_Pi;
         determineOS();
         List<File> midiFiles = listMidiFiles();
@@ -121,19 +123,22 @@ public class WindowController_Pi {
 
     private List<File> listMidiFiles() {
         List<File> midiFiles = new ArrayList<>();
-        List<File> midiFolderNames = new ArrayList();
+        List<File> midiFolderNames = new ArrayList<>();
 
-        if (OS.toLowerCase().contains("windows")) {
+        if (SystemUtils.IS_OS_WINDOWS) {
             midiFolderNames.addAll(Arrays.asList(File.listRoots()));
-        } else if (OS.toLowerCase().contains("linux")) {
-            File usbFolder = new File("/media");
-
-            midiFolderNames.addAll(Arrays.asList(usbFolder.listFiles()));
-            midiFolderNames.add(new File("/home/pi"));
-            System.out.println("files count: " + midiFolderNames.size());
-
+        } else if (SystemUtils.IS_OS_LINUX) {
+            String homeDir = System.getProperty("user.home");
+            midiFolderNames.add(new File(homeDir));
+            if (SystemUtils.OS_ARCH.equals("amd64")) { // ubuntu
+                System.out.println("files count: " + midiFolderNames.size());
+            } else { // raspberry
+                File usbFolder = new File("/media");
+                midiFolderNames.addAll(Arrays.asList(usbFolder.listFiles()));
+                System.out.println("files count: " + midiFolderNames.size());
+            }
         } else {
-            return null;
+            throw new RuntimeException("Unhandled os: " + SystemUtils.OS_NAME);
         }
 
         for (File file : midiFolderNames) {
@@ -241,5 +246,12 @@ public class WindowController_Pi {
 
     public void setEnablingOfStop(boolean b) {
         window_Pi.getStopButton().setEnabled(b);
+    }
+
+    /**
+     * call to shutdown pi4j
+     */
+    public void disposePi4j() {
+        model.getPinoutService().shutdown();
     }
 }

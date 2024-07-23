@@ -1,12 +1,6 @@
 <component name="libraryTable">
   <library name="KuKuFi-autoPRK-Player">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/KuKuFi-autoPRK-Player/commons-lang3-3.3.2-bin.zip!/" />
-      <root url="jar://$PROJECT_DIR$/KuKuFi-autoPRK-Player/RXTXcomm.jar!/" />
-      <root url="jar://$PROJECT_DIR$/KuKuFi-autoPRK-Player/gson-2.3.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/KuKuFi-autoPRK-Player/gson-2.3.1-javadoc.jar!/" />
-      <root url="jar://$PROJECT_DIR$/KuKuFi-autoPRK-Player/json-20141113.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>

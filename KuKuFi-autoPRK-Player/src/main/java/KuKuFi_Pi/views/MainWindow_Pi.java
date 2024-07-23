@@ -11,7 +11,12 @@ import KuKuFi_Pi.views.Components.ConnectPanel;
 import KuKuFi_Pi.views.Components.DrumTrackPanelBase;
 import KuKuFi_Pi.views.Components.LeftElementPanel;
 import KuKuFi_Pi.views.Components.RightDrumPanel;
+import com.pi4j.Pi4J;
+
 import java.awt.CardLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -388,9 +393,19 @@ public class MainWindow_Pi extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+//
+       //         Logger logger = LoggerFactory.getLogger(Pi4J.class);
                 window_Pi = new MainWindow_Pi();
                 window_Pi.setVisible(true);
-                WindowController_Pi.getInstance();
+                WindowController_Pi instance = WindowController_Pi.getInstance();
+                window_Pi .addWindowListener(new WindowAdapter() {
+                    public void windowClosing(WindowEvent e) {
+                        // call terminate
+                        System.out.println("zamykanie");
+                        instance.disposePi4j();
+                    }
+                });
+
             }
         });
     }

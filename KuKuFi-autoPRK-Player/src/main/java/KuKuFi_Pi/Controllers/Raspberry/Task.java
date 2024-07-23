@@ -5,20 +5,19 @@
  */
 package KuKuFi_Pi.Controllers.Raspberry;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author fbrzuzka
- */
+@Slf4j
 class Task implements Runnable {
 
-    private Pin_Pi pin;
+    private final Pin_Pi pin;
 
     public Task(Pin_Pi pin) {
         this.pin = pin;
-        System.out.println("teraz gra: " + pin.name);
+        log.info("teraz gra: {}", pin.name);
     }
 
     public void run() {

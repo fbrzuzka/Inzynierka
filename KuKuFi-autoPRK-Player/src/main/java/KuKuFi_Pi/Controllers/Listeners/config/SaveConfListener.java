@@ -8,6 +8,8 @@ package KuKuFi_Pi.Controllers.Listeners.config;
 import KuKuFi_Pi.Models.Model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import lombok.extern.slf4j.Slf4j;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -18,6 +20,7 @@ import java.io.IOException;
  *
  * @author fbrzuzka
  */
+@Slf4j
 public class SaveConfListener implements ActionListener {
 
     @Override
@@ -27,18 +30,10 @@ public class SaveConfListener implements ActionListener {
         System.out.println(json);
         String nameOfFile = Model.midiFile.getAbsolutePath() + ".json";
 
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter(nameOfFile));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nameOfFile))) {
             writer.write(json);
         } catch (IOException e) {
-        } finally {
-            try {
-                if (writer != null) {
-                    writer.close();
-                }
-            } catch (IOException e) {
-            }
+            log.warn("Cannot write configuration ", e);
         }
     }
 }

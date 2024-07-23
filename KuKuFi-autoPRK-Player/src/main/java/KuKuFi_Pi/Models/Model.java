@@ -1,17 +1,18 @@
 package KuKuFi_Pi.Models;
 
-import KuKuFi_Pi.Controllers.Raspberry.GPIOController;
 import KuKuFi_Pi.Controllers.Raspberry.KuPlayerController;
 import KuKuFi_Pi.Controllers.Raspberry.PiExecutor;
+import KuKuFi_Pi.Controllers.Raspberry.Pin_Pi;
 import KuKuFi_Pi.MidiPlayer.SequencePlayer;
 import KuKuFi_Pi.Models.Containers.ConnectConfiguration;
 import KuKuFi_Pi.Models.Containers.DrumPartList;
 import KuKuFi_Pi.Models.Containers.ProtocolListHashMap;
 import KuKuFi_Pi.Models.Containers.TrackMap;
-import com.pi4j.io.gpio.GpioFactory;
-import com.pi4j.io.gpio.GpioPinDigitalOutput;
-import com.pi4j.io.gpio.PinState;
-import com.pi4j.io.gpio.RaspiPin;
+import KuKuFi_Pi.pinout.Pin;
+import KuKuFi_Pi.pinout.PinoutService;
+import KuKuFi_Pi.pinout.PinoutServiceFactory;
+import lombok.Getter;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,16 +25,25 @@ import javax.sound.midi.Track;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
- *
  * @author fbrzuzka
+ * Pins are mapping from PIN_X = Y, where X is WiringPi number and Y is a BCM pin number
  */
 public class Model {
 
-    public static final int NOTE_ON = 0x90;
-    public static final int NOTE_OFF = 0x80;
     public static final String[] NOTE_NAMES
             = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
+    private static final Integer PIN_0 = 17;
+    private static final Integer PIN_1 = 18;
+    private static final Integer PIN_2 = 27;
+    private static final Integer PIN_3 = 22;
+    private static final Integer PIN_4 = 23;
+    private static final Integer PIN_5 = 24;
+    private static final Integer PIN_6 = 25;
+    private static final Integer PIN_7 = 4;
+    private static final Integer PIN_8 = 2;
+    private static final Integer PIN_9 = 3;
     public static File midiFile;
     public double tickToMilisRatio;
     public static Sequence sequenceToPlayFromSpeakers;
@@ -49,22 +59,25 @@ public class Model {
 
     public int numerator = 0;
     public double denominator = 0;
-    public int ticksPerMetronomClick = 0;
+    public int ticksPerMetronomeClick = 0;
 
     public static TrackMap trackListOriginal;
 
-    public static GPIOController controller;
+    //    public static GPIOController controller;
     public static KuPlayerController kuPlayerController;
     public static PiExecutor piExecutor;
-    public static HashMap<String, GpioPinDigitalOutput> outputPinMap = new HashMap<>();
 
     public static String os;
+    @Getter
+    private final PinoutService pinoutService;
+    private HashMap<String, Pin> outputPinMap = new HashMap<>();
 
     private Model() {
+        this.pinoutService = new PinoutServiceFactory().createService();
         os = System.getProperty("os.name");
         System.out.println("os: " + os);
         if (os.toLowerCase().contains("windows")) {
-
+            System.out.println("OS: " + os);
         } else {
             preparePinout();
         }
@@ -77,7 +90,37 @@ public class Model {
         trackListToPlayFromSpeakers = new TrackMap();
         connectConfig = new ConnectConfiguration();
 
-        drumKitPartElements = new ArrayList<String>();
+        initDrumKitParts();
+    }
+
+    private static Model instance = null;
+
+    public static Model getInstance() {
+        if (instance == null) {
+            instance = new Model();
+        }
+        return instance;
+    }
+
+    public Pin getOutputPin(String name) {
+        return outputPinMap.get(name);
+    }
+
+    private void preparePinout() {
+        outputPinMap.put("pin0", pinoutService.createPin(PIN_0, "pin0"));
+        outputPinMap.put("pin1", pinoutService.createPin(PIN_1, "pin1"));
+        outputPinMap.put("pin2", pinoutService.createPin(PIN_2, "pin2"));
+        outputPinMap.put("pin3", pinoutService.createPin(PIN_3, "pin3"));
+        outputPinMap.put("pin4", pinoutService.createPin(PIN_4, "pin4"));
+        outputPinMap.put("pin5", pinoutService.createPin(PIN_5, "pin5"));
+        outputPinMap.put("pin6", pinoutService.createPin(PIN_6, "pin6"));
+        outputPinMap.put("pin7", pinoutService.createPin(PIN_7, "pin7"));
+        outputPinMap.put("pin8", pinoutService.createPin(PIN_8, "pin8"));
+        outputPinMap.put("pin9", pinoutService.createPin(PIN_9, "pin9"));
+    }
+
+    private void initDrumKitParts() {
+        drumKitPartElements = new ArrayList<>();
         drumKitPartElements.add("1");
         drumKitPartElements.add("2");
         drumKitPartElements.add("3");
@@ -88,40 +131,5 @@ public class Model {
         drumKitPartElements.add("8");
         drumKitPartElements.add("9");
         drumKitPartElements.add("10");
-
     }
-
-    private static Model instance = null;
-
-    public static Model instanceOf() {
-        if (instance == null) {
-            instance = new Model();
-        }
-        return instance;
-    }
-
-    private void preparePinout() {
-        String pinName;
-        pinName = "pin0";
-        outputPinMap.put(pinName, GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_00, pinName, PinState.HIGH));
-        pinName = "pin1";
-        outputPinMap.put(pinName, GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_01, pinName, PinState.HIGH));
-        pinName = "pin2";
-        outputPinMap.put(pinName, GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_02, pinName, PinState.HIGH));
-        pinName = "pin3";
-        outputPinMap.put(pinName, GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_03, pinName, PinState.HIGH));
-        pinName = "pin4";
-        outputPinMap.put(pinName, GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_04, pinName, PinState.HIGH));
-        pinName = "pin5";
-        outputPinMap.put(pinName, GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_05, pinName, PinState.HIGH));
-        pinName = "pin6";
-        outputPinMap.put(pinName, GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_06, pinName, PinState.HIGH));
-        pinName = "pin7";
-        outputPinMap.put(pinName, GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_07, pinName, PinState.HIGH));
-        pinName = "pin8";
-        outputPinMap.put(pinName, GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_08, pinName, PinState.HIGH));
-        pinName = "pin9";
-        outputPinMap.put(pinName, GpioFactory.getInstance().provisionDigitalOutputPin(RaspiPin.GPIO_09, pinName, PinState.HIGH));
-    }
-
 }

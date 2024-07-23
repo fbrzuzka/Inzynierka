@@ -26,7 +26,6 @@ import KuKuFi_Pi.views.Components.NamedJRadioButton;
 import KuKuFi_Pi.views.MainWindow;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.List;
 import java.util.logging.Level;
@@ -54,7 +53,7 @@ public class WindowController {
     }
 
     private WindowController() {
-        this.model = Model.instanceOf();
+        this.model = Model.getInstance();
         WindowController.window = MainWindow.window;
         configureListeners();
 

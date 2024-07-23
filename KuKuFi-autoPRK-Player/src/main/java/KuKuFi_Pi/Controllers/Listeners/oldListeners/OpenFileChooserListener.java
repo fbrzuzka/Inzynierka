@@ -25,9 +25,8 @@ public class OpenFileChooserListener implements ActionListener {
     private final MainWindow window;
 
     public OpenFileChooserListener() {
-
         this.window = MainWindow.window;
-        this.model = Model.instanceOf();
+        this.model = Model.getInstance();
     }
 
     @Override

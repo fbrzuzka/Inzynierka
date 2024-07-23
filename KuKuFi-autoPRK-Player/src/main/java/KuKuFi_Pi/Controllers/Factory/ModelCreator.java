@@ -28,12 +28,13 @@ import javax.sound.midi.Track;
 
 public class ModelCreator {
 
-    static Model model = Model.instanceOf();
+    private final Model model;
     private static final Integer leadTimeMilis = 20;
     private static final int numberOfDrumKitFromBiedrzyProgram = 10;
 
     public ModelCreator() {
         Model.protocolList = new ProtocolListHashMap();
+        this.model =  Model.getInstance();
         setResolutionInMs(Model.sequenceOriginal);
         echoInfoAboutModel();
         Model.protocolList = newParseToHashMap(model.trackSelectedToGenerate);
@@ -240,11 +241,11 @@ public class ModelCreator {
             byte[] data = mm.getData();
             model.numerator = data[0];
             model.denominator = pow(2, data[1]);
-            model.ticksPerMetronomClick = data[2];
+            model.ticksPerMetronomeClick = data[2];
         }
     }
 
-    private static void echoInfoAboutModel() {
+    private void echoInfoAboutModel() {
         float timingType = model.sequenceOriginal.getDivisionType();
 
         System.out.println("timingType: " + timingType);
@@ -262,7 +263,7 @@ public class ModelCreator {
 
         System.out.println("numerator: " + model.numerator);
         System.out.println("denominator: " + model.denominator);
-        System.out.println("ticksPerMetronomClixk: " + model.ticksPerMetronomClick);
+        System.out.println("ticksPerMetronomClixk: " + model.ticksPerMetronomeClick);
 
         System.out.println("sequence.getTickLength()  " + Model.sequenceOriginal.getTickLength());
         System.out.println("sequence.getMicrosecondLength()  " + Model.sequenceOriginal.getMicrosecondLength());

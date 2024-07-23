@@ -1,6 +1,7 @@
 package KuKuFi_Pi.MidiPlayer;
 
 import KuKuFi_Pi.Models.Model;
+
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,10 +9,9 @@ import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Receiver;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
-import javax.sound.midi.Transmitter;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class SequencePlayer {
@@ -28,12 +28,12 @@ public class SequencePlayer {
         this.sequenceToPlay = seq;
 
         try {
-          //  receivingDevice = getReceivingDevice();
-          //  receivingDevice.open();
+            //  receivingDevice = getReceivingDevice();
+            //  receivingDevice.open();
             sequencer1 = MidiSystem.getSequencer(true);
             //Transmitter tx1 = sequencer1.getTransmitter();
-           // Receiver rx1 = receivingDevice.getReceiver();
-         //   tx1.setReceiver(rx1);
+            // Receiver rx1 = receivingDevice.getReceiver();
+            //   tx1.setReceiver(rx1);
 
             sequencer1.open();
             sequencer1.setSequence(sequenceToPlay);
@@ -46,10 +46,10 @@ public class SequencePlayer {
 
     }
 
-    
+
     public void callSlider() {
 
-        int position = (int) (sequencer1.getTickPosition() * Model.instanceOf().tickToMilisRatio / 1000);
+        int position = (int) (sequencer1.getTickPosition() * Model.getInstance().tickToMilisRatio / 1000);
         listner.handleEvent(position);
     }
 
@@ -78,7 +78,7 @@ public class SequencePlayer {
                 String lcName
                         = StringUtils.defaultString(mdi.getName())
                         .toLowerCase(Locale.ENGLISH);
-                
+
                 if (lcName.contains("midi")) {
                     return dev;
                 }
