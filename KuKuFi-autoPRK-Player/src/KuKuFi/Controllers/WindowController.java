@@ -21,6 +21,7 @@ import KuKuFi.Models.DrumPart;
 import KuKuFi.Models.Containers.DrumPartList;
 import KuKuFi.Models.Model;
 import KuKuFi.Models.Containers.TrackMap;
+import KuKuFi.views.Components.NamedJRadioButton;
 import KuKuFi.views.MainWindow;
 import java.awt.Component;
 import java.awt.Container;
@@ -85,12 +86,13 @@ public class WindowController {
         window.getConnectPanel().getDrumTrackPanel().setLayout(new GridLayout(0, 1));
         try {
             for (DrumPart drumElement : drumTrackElements) {
-                JRadioButton radio = new JRadioButton(drumElement.getPartName());
+                NamedJRadioButton radio = new NamedJRadioButton(drumElement.getPartName() + " (" + Model.protocolList.get(drumElement.getPartName()).size() + ")");
+                radio.setName(drumElement.getPartName());
                 radio.setSelected(false);
                 window.getConnectPanel().getDrumTrackPanel().add(radio);
                 window.getConnectPanel().getDrumTrackPanel().getGroup().add(radio);
                 radio.addActionListener(window.getConnectPanel());
-                PRKLogger.instance().logToInfoArea(Integer.toString(window.getConnectPanel().getDrumTrackPanel().getComponentZOrder(radio)));
+              //  PRKLogger.instance().logToInfoArea(Integer.toString(window.getConnectPanel().getDrumTrackPanel().getComponentZOrder(radio)));
 
             }
         } catch (Exception e) {
@@ -209,7 +211,7 @@ public class WindowController {
     public void echoFewImportantInfoOnInfoArea() {
 
         PRKLogger.instance().logToInfoArea("midi file name: " + model.midiFile.getName());
-        PRKLogger.instance().logToInfoArea("metrum: " + model.numerator + "/" + model.denominator);
+        PRKLogger.instance().logToInfoArea("metrum: " + 4 + "/" + 4);
 
         PRKLogger.instance().logToInfoArea("number of ticks:  " + Model.sequenceOriginal.getTickLength());
         PRKLogger.instance().logToInfoArea("lenght in ms:  " + Model.sequenceOriginal.getMicrosecondLength());

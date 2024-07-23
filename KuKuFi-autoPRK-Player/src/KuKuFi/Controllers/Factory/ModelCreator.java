@@ -23,6 +23,8 @@ import KuKuFi.Models.Containers.SingleDrumElementTimelineArray;
 import com.sun.org.apache.xalan.internal.lib.ExsltMath;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 import static javax.sound.midi.ShortMessage.NOTE_ON;
@@ -30,6 +32,9 @@ import static javax.sound.midi.ShortMessage.NOTE_ON;
 public class ModelCreator {
 
     static Model model = Model.instanceOf();
+    private static final Integer leadTimeMilis = 20;
+    private static final int numberOfDrumKitFromBiedrzyProgram = 10;
+            
 
     public ModelCreator() {
         Model.protocolList = new ProtocolListHashMap();
@@ -63,9 +68,9 @@ public class ModelCreator {
                     int key = sm.getData1();
                     int velocity = sm.getData2();
                     
-                    System.out.print("@" + event.getTick() + " " + tempoTickInMs + " ");
-                    System.out.print("Channel: " + sm.getChannel() + " ");
-                    System.out.println(" velocity: " + velocity + DrumPartListSingleton.getInstance().get(key).toString());
+//                    System.out.print("@" + event.getTick() + " " + tempoTickInMs + " ");
+//                    System.out.print("Channel: " + sm.getChannel() + " ");
+//                    System.out.println(" velocity: " + velocity + DrumPartListSingleton.getInstance().get(key).toString());
 
                     DrumPart drumPart = DrumPartListSingleton.getInstance().get(key);
                     rc.get(drumPart.getPartName()).add(tempoTickInMs);
@@ -75,9 +80,94 @@ public class ModelCreator {
         }
         System.out.println();
         System.out.println("rc: " + rc.toString());
-        return rc;
-    
+        rc = splitClosedHiHatToOpenAndPedal(rc);
+        System.out.println();
+        System.out.println("splitClosedHiHatToOpenAndPedal rc: " + rc.toString());
         
+        
+        fillToTenDrumElements(Model.drumTrackElements, rc);
+        
+        return rc;
+        
+    }
+    
+        private void fillToTenDrumElements(DrumPartList drumTrackElements, ProtocolListHashMap protocolListHashMap) {
+        
+            
+        ArrayList<DrumPart> drumPartToAdd = new ArrayList<>();
+        
+        if(drumTrackElements.size() < numberOfDrumKitFromBiedrzyProgram){
+            int numberOfMissed = numberOfDrumKitFromBiedrzyProgram - drumTrackElements.size();
+            for(int i = 1 ; i<=numberOfMissed ; i++){
+                drumTrackElements.add(DrumPartListSingleton.getInstance().get(100+i));
+                drumPartToAdd.add(DrumPartListSingleton.getInstance().get(100+i));
+            }
+        }
+       
+        
+        if(protocolListHashMap.size() < numberOfDrumKitFromBiedrzyProgram){
+            int numberOfMissed = numberOfDrumKitFromBiedrzyProgram - protocolListHashMap.size();
+            int milisToOdd = 40;
+            int i=0;
+            for(DrumPart drumPart : drumPartToAdd){
+                SingleDrumElementTimelineArray singleDrumElementTimelineArray = new SingleDrumElementTimelineArray(drumPart);
+                singleDrumElementTimelineArray.add((int)Model.sequenceOriginal.getTickLength() - milisToOdd*i);
+                protocolListHashMap.put(drumPart.getPartName(), singleDrumElementTimelineArray);
+            }
+        }
+        for (DrumPart drumPart : drumTrackElements) {
+            System.out.println(drumPart);
+        }
+        
+    }
+    
+    public ProtocolListHashMap splitClosedHiHatToOpenAndPedal(ProtocolListHashMap protocolListHashMap){
+        
+        SingleDrumElementTimelineArray closedHiHat;
+        SingleDrumElementTimelineArray openHiHat;
+        SingleDrumElementTimelineArray pedalHiHat;
+        
+        
+            if(protocolListHashMap.containsKey("Closed Hi-Hat")){
+                //get closed HiHat SingleDrumElementTimelineArray and remove it from protocolArrayList
+                closedHiHat = protocolListHashMap.remove("Closed Hi-Hat");
+                Model.drumTrackElements.remove(DrumPartListSingleton.getInstance().get(42));
+            }else{
+                return protocolListHashMap;
+            }
+            
+            
+            if(protocolListHashMap.containsKey("Open Hi-Hat")){
+                //get open HiHat SingleDrumElementTimelineArray
+                openHiHat = protocolListHashMap.get("Open Hi-Hat");
+            }else{
+                DrumPart openHiHatDrumPart = DrumPartListSingleton.getInstance().get(46);
+                openHiHat = new SingleDrumElementTimelineArray(openHiHatDrumPart);
+                protocolListHashMap.put("Open Hi-Hat", openHiHat);
+                Model.drumTrackElements.add(openHiHatDrumPart);
+            }
+            if(protocolListHashMap.containsKey("Pedal Hi-Hat")){
+                //get pedal HiHat SingleDrumElementTimelineArray
+                pedalHiHat = protocolListHashMap.get("Pedal Hi-Hat");
+            }else{
+                DrumPart pedalHiHatDrumPart = DrumPartListSingleton.getInstance().get(44);
+                pedalHiHat = new SingleDrumElementTimelineArray(pedalHiHatDrumPart);
+                protocolListHashMap.put("Pedal Hi-Hat", pedalHiHat);
+                Model.drumTrackElements.add(pedalHiHatDrumPart);
+            }
+        
+            for(Integer time : closedHiHat){
+                openHiHat.add(time);
+                if(time >= leadTimeMilis){
+                    pedalHiHat.add(time-leadTimeMilis);
+                }
+            } 
+            
+        //need some sort
+            Collections.sort(openHiHat);
+            Collections.sort(pedalHiHat);
+        
+        return protocolListHashMap;
     }
     
     
@@ -145,9 +235,10 @@ public class ModelCreator {
                 }
             }
         }
-        for (Integer  index : l) {
-            System.out.println(DrumPartListSingleton.getInstance().get(index));
-        }
+//        for (Integer  index : l) {
+//            System.out.println(DrumPartListSingleton.getInstance().get(index));
+//        }
+        
         return listOfDrumKitElements;
     }
 
@@ -196,4 +287,8 @@ public class ModelCreator {
         System.out.println("");
 
     }
+
+    
+
+    
 }

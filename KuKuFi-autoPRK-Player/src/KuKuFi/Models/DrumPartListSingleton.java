@@ -64,6 +64,15 @@ public class DrumPartListSingleton extends LinkedHashMap<Integer, DrumPart> {
         put(79, new DrumPart(79, "Open Cuica"));
         put(80, new DrumPart(80, "Mute Triangle"));
         put(81, new DrumPart(81, "Open Triangle"));
+        put(101, new DrumPart(101, "empty1"));
+        put(102, new DrumPart(102, "empty2"));
+        put(103, new DrumPart(103, "empty3"));
+        put(104, new DrumPart(104, "empty4"));
+        put(105, new DrumPart(105, "empty5"));
+        put(106, new DrumPart(106, "empty6"));
+        put(107, new DrumPart(107, "empty7"));
+        put(108, new DrumPart(108, "empty8"));
+        put(109, new DrumPart(109, "empty9"));
  
  
     }

@@ -40,13 +40,13 @@ public class ConnectPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        JRadioButton radioTrack = null;
+        NamedJRadioButton radioTrack = null;
         JRadioButton radioElement = null;
 
         if (ae.getSource() instanceof JRadioButton) {
             JRadioButton radio = (JRadioButton) ae.getSource();
             if (radio.getParent() == drumTrackPanel) {
-                radioTrack = radio;
+                radioTrack = (NamedJRadioButton)radio;
             } else if (radio.getParent() == drumKitElementPanel) {
                 radioElement = radio;
             }
@@ -65,7 +65,7 @@ public class ConnectPanel extends JPanel implements ActionListener {
                     if (c instanceof JRadioButton) {
                         r = (JRadioButton) c;
                         if (r.isSelected()) {
-                            b = r.getText();
+                            b = r.getName();
 
                             drumTrackPanel.moveRadioToUpOnPanel(r);
                             drumKitElementPanel.moveRadioToUpOnPanel(radio);
@@ -74,7 +74,7 @@ public class ConnectPanel extends JPanel implements ActionListener {
                     }
                 }
             } else if ((radioTrack != null) && (drumKitElementPanel.getGroup().getSelection() != null)) {
-                b = radioTrack.getText();
+                b = radioTrack.getName();
 
                 Component[] components = drumKitElementPanel.getComponents();
                 for (Component c : components) {

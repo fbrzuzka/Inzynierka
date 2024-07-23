@@ -30,9 +30,14 @@ public class DrumTrackPanelBase extends JPanel {
     }
 
     public void moveRadioToUpOnPanel(JRadioButton radio) {
-        this.setComponentZOrder(radio, 0);
-        radio.setEnabled(false);
-        group.clearSelection();
+        try{
+            this.setComponentZOrder(radio, 0);
+            radio.setEnabled(false);
+            group.clearSelection();            
+        }catch(NullPointerException npexception){
+            System.out.println("Nie znalazłem radiobuttona");
+                    
+        }
     }
 
     void clear() {
@@ -66,7 +71,13 @@ public class DrumTrackPanelBase extends JPanel {
     public JRadioButton findByName(String name) {
         JRadioButton rb = null;
         for (Component component : this.getComponents()) {
-            if (component instanceof JRadioButton) {
+            if (component instanceof NamedJRadioButton) {
+                NamedJRadioButton namedRadio = (NamedJRadioButton) component;
+                if (namedRadio.getName().equals(name)) {
+                    rb = namedRadio;
+                }
+
+            }else if (component instanceof JRadioButton) {
                 JRadioButton radio = (JRadioButton) component;
                 if (radio.getText().equals(name)) {
                     rb = radio;
