@@ -97,11 +97,36 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
+<!--                            <addClasspath>true</addClasspath>-->
                             <mainClass>KuKuFi_Pi.views.MainWindow_Pi</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
+            </plugin>
+            <!--
+            https://maven.apache.org/plugins/maven-shade-plugin/
+            This plugin provides the capability to package the artifact in an uber-jar, including its dependencies and
+            to shade - i.e. rename - the packages of some of the dependencies. The transformer will combine the files
+            in the META-INF.services directories of multiple Pi4J plugins with the same package name into one file.
+            More info here: https://github.com/Pi4J/pi4j-example-fatjar/blob/main/pom.xml
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <configuration>
+                    <transformers>
+                        <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                    </transformers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
